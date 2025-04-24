@@ -73,9 +73,13 @@ O sinal de corrente analógico (4 … 40 mA) do sensor ultrassônico (1) está c
 
 ### Sensores capacitivo de proximidade - B113 / B114
 
+![Sensor de nível ultrassônico](https://github.com/joananana/PI3-2024-2/raw/main/imagens/B113_B114.JPG)
+
 Dois interruptores de proximidade capacitivos, B113 (1) e B114 (2), estão localizados na lateral do tanque inferior B101 e montados em uma placa de perfil. Os interruptores de proximidade podem ser ajustados mecanicamente. A distância de detecção através da parede do tanque pode ser ajustada com um parafuso. Os sinais de entrada binários de 24V são conectados ao terminal de E/S XMA1. 
 
 ### Interruptores de nível tipo boia - S111 / S112 / S117
+
+![Sensor de nível ultrassônico](https://github.com/joananana/PI3-2024-2/raw/main/imagens/S112.JPG)
 
 * **S111:** O transbordamento no tanque B101 é monitorado com o interruptor de boia. Se o nível no tanque exceder o nível máximo, o cilindro de boia transparente é empurrado para cima, ativando um contato reed. Os sinais de entrada binários de 24V (normalmente abertos) são conectados ao terminal de E/S XMA1.
 
@@ -85,13 +89,19 @@ Dois interruptores de proximidade capacitivos, B113 (1) e B114 (2), estão local
 
 ### Sensor de vazão - B102
 
+![Sensor de nível ultrassônico](https://github.com/joananana/PI3-2024-2/raw/main/imagens/B102.JPG)
+
 Um sinal de onda quadrada constante do sensor de vazão está conectado a uma entrada binária no terminal de E/S XMA1 (I0). O nível do sinal depende da tensão de alimentação aplicada (8 … 24 V). O sinal de frequência também está conectado ao transformador de medição A2, que converte o sinal em uma tensão padrão de 0 a 10 V.
 
 ### Sensor de pressão - B103
 
+![Sensor de nível ultrassônico](https://github.com/joananana/PI3-2024-2/raw/main/imagens/B103.JPG)
+
 O sensor de pressão (2) piezoresistivo envia um sinal analógico de 0 a 10V de acordo com a pressão no tanque B103 entre 0 e 400 mbar.
 
 ### Sensor de temperatura - B104
+
+![Sensor de nível ultrassônico](https://github.com/joananana/PI3-2024-2/raw/main/imagens/B104.JPG)
 
 A resistência do sensor de temperatura (2) está conectada ao transformador de medição A3, que converte a resistência em um sinal de tensão padrão (0 a 10 V), conectado ao terminal analógico X2 (UE4). O aquecimento é controlado por um relé interno, ativado por uma saída digital (O1 no XMA1).
 
