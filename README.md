@@ -141,9 +141,9 @@ O aquecimento é controlado internamente pela bancada, ativado por uma saída bi
 
 ## Tabelas de mapeamento
 
-![tabela de mapeamento](https://github.com/joananana/PI3-2024-2/raw/main/imagens/XMA1.JPG)
+###Terminal I/O Digital 
 
-Terminal I/O Digital 
+![Terminal I/O Digital](https://github.com/joananana/PI3-2024-2/raw/main/imagens/XMA1.JPG)
 
 A bancada utiliza um terminal I/O digital, identificado como XMA1, para comunicação entre os sensores de saída binária com sua interface. 
 
@@ -182,7 +182,10 @@ O terminal I/O digital trabalha com uma tensão de 24V, a qual precisaremos adeq
 
 
 
-Terminal I/O Analógico. 
+### Terminal I/O Analógico 
+
+![Terminal I/O Digital](https://github.com/joananana/PI3-2024-2/raw/main/imagens/X2.JPG)
+
 Os componentes analógicos da bancada também estão conectados a uma terminal I/O, identificado como X2, para facilitar a integração e comunicação. Todos os sinais são convertidos para níveis de tensão entre 0 e 10V, os quais teremos que adequar para leitura nos conversores analógico-digitais de nosso microcontrolador. 
 Este terminal utiliza um conector D-Sub 15 pinos para comunicação com a interface, o qual utilizaremos em nosso benefício para conexão da nossa interface. Para isso, mapeamos os pinos do terminal e suas funções de controle dos componentes da bancada. 
 | **Descrição**                             | **Símbolo** | **Atribuição de pinos** | **Referência** |
