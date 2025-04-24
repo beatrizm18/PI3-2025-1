@@ -19,4 +19,27 @@ O sistema será modular, permitindo a ativação ou desativação de cada contro
 	Com isso, o projeto entregará uma solução funcional de controle embarcado, implementada de forma autônoma e adaptada à estrutura real da bancada. A expectativa é obter um controle estável, responsivo e confiável, que permita atuar sobre variáveis reais de processo com precisão e repetibilidade, servindo como uma base para futuras melhorias e integrações com sistemas de supervisão.
 
 
+### JUSTICATIVA DA ESCOLHA DO MSP430
+
+
+### SENSORES E ATUADORES DA BANCADA FESTO - MPS PA COMPACT WORKSTATION
+
+### Lista de Sonsores
+	* Sensor de nível ultrassônico - B101
+ 	* Sensoores capaciitivo de proximidade - B113/B114
+  	* Interruptores de nível tipo boia - S111/ S112/ S117
+   	* Sensor de vazão - B102
+    	* Sensor de pressão - B103
+     	* Sensor de temperatura - B104
+
+### Lista de Atuadores
+	* Bomba centrífuga - P101
+ 	* Válvula proporcional para controle de vazão - V106
+  	* Válvula esférica - V102
+   	* Aquecedor - E104
+
+
+ 	
+ 	
+
 	
