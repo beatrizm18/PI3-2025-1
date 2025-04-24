@@ -46,7 +46,7 @@ ________________________________________________________________________________
   	* Interruptores de nível tipo boia - S111/ S112/ S117
    	* Sensor de vazão - B102
     	* Sensor de pressão - B103
-     	* Sensor de temperatura - B104
+	* Sensor de temperatura - B104
 
 ### Lista de Atuadores
 	* Bomba centrífuga - P101
