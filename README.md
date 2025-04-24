@@ -88,3 +88,5 @@ ________________________________________________________________________________
 | 15 | R17, R18, R19, R20        | RES 68K OHM 5% 1/8W                             | 4        | RESISTOR          |
 | 16 | D1, D2, D3, D4            | Schottky Diode                                  | 4        | SOT95P230X110-3N  |
 | 17 | LCD1                     | 16×2 Dot Matrix LCD Display                     | 1        | LCD_16x2          |
+
+### Fluxograma
