@@ -17,7 +17,9 @@ Será desenvolvida toda a estrutura de controle, incluindo:
 * Aplicação do algoritmo PID com ajuste fino dos parâmetros Kp, Ki e Kd;
 * Geração de sinais de saída compatíveis com os atuadores utilizados (ex: PWM para válvula, sinal contínuo para o aquecedor);
 * Validação do controle com testes físicos em bancada, em condições variadas.
+
 O sistema será modular, permitindo a ativação ou desativação de cada controle individualmente (por exemplo, testar o controle de nível isolado antes de integrá-lo ao controle de temperatura. Esse desenvolvimento modular facilita os testes, a depuração e possíveis expansões futuras. 
+
 O sistema de controle PID será inicialmente ajustado por meio de simulações e, posteriormente, ajustado através de testes no laboratório. Esse recurso aumentará a flexibilidade do sistema, permitindo que ele seja adaptado facilmente a diferentes cenários e condições de operação.
 Com as melhorias do firware, o sistema de controle PID proporcionará um controle mais preciso e poderão ser observador os efeitos dos ajuste no comportamento do sistema. 
 
