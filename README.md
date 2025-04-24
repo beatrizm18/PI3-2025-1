@@ -237,4 +237,4 @@ ___________________
 | 17 | LCD1                     | 16×2 Dot Matrix LCD Display                     | 1        | LCD_16x2          |
 
 ### Fluxograma
-![Fluxograma](fluxograma.png)
+![Fluxograma](fluxograma.jpg)
