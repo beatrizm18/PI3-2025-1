@@ -67,6 +67,8 @@ ________________________________________________________________________________
 
 ### Sensor de nível ultrassônico - B101
 
+![Sensor de nível ultrassônico](https://github.com/joananana/PI3-2024-2/raw/main/imagens/B101.JPG)
+
 O sinal de corrente analógico (4 … 40 mA) do sensor ultrassônico (1) está conectado como um sinal padrão ao terminal análogico X2 (IE1) no canal 0. O sinal de corrente também está conectado ao transformador de medição A1, que converte o sinal de corrente analógico em um sinal de tensão padrão (0 … 10V). O sinal de tensão padrão também está conectado ao terminal analógico X2 (UE1).
 
 ### Sensores capacitivo de proximidade - B113 / B114
