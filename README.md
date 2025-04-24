@@ -106,19 +106,21 @@ O sensor de pressão (2) piezoresistivo envia um sinal analógico de 0 a 10V de 
 A resistência do sensor de temperatura (2) está conectada ao transformador de medição A3, que converte a resistência em um sinal de tensão padrão (0 a 10 V), conectado ao terminal analógico X2 (UE4). O aquecimento é controlado por um relé interno, ativado por uma saída digital (O1 no XMA1).
 
 ________________________________________________________________________________________________
-Bomba centrífuga - P101
+## Atuadores
+
+### Bomba centrífuga - P101
 
 A bomba(1) é acionada pelo controlador de motor A4 e pelo relé K1. Com uma saída digital (O2 no XMA1), é possível alternar entre controle binário e controle analógico (0 e 24V). No controle binário, a bomba é ligada/desligada com uma saída adicional (O3 no XMA1). No controle analógico, a tensão de acionamento define a velocidade da bomba(0 a 10V).
 
-Válvula proporcional para controle de vazão - V106
+### Válvula proporcional para controle de vazão - V106
 
 A eletrôncia de controle da válvula é ativada com uma saída binária (O4 no XMA1). Um sinal analógico do canal 1 (UA2 no X2) aciona a válvula com um sinal padrão de 0 a 10 V. 
 
-Válvula esférica - V102
+### Válvula esférica - V102
 
 O acessório de detecção de posição final é composto por dois micro relés elétricos. Os sinais binários de 24 VDC (S115 e S116) estão conectados como entradas no terminal de E/S XMA1. 
 
-Aquecedor - E104
+### Aquecedor - E104
 
 O aquecimento é controlado internamente pela bancada, ativado por uma saída binário (O1 no XMA1). O controle do aquecimento pode ser binário ou contínuo (modulação por largura de pulso - PWM). 
 
