@@ -23,6 +23,7 @@ Além da programação embarcada, o projeto também contempla a simulação do c
 	
 Com isso, o projeto entregará uma solução funcional de controle embarcado, implementada de forma autônoma e adaptada à estrutura real da bancada. A expectativa é obter um controle estável, responsivo e confiável, que permita atuar sobre variáveis reais de processo com precisão e repetibilidade, servindo como uma base para futuras melhorias e integrações com sistemas de supervisão.
 
+______________________________________________________________________________________________
 
 ### JUSTICATIVA DA ESCOLHA DO MSP430 
 O MSP430 é uma família de microcontroladores desenvolvida pela Texas Instruments, reconhecida por sua alta eficiência energética e arquitetura otimizada para aplicações embarcadas de baixo consumo. Uma das principais razões para a escolha é a eficiência, que o torna adequado para projetos de monitoramento e sensores.
@@ -35,6 +36,7 @@ Outro ponto relevante é a ampla documentação técnica e suporte, que facilita
 
 Dessa forma, o MSP430 se mostra uma excelente escolha para o projeto, obtendo medições precisas, baixo consumo de energia e operação confiável, como o analisador de parâmetros. Sua simplicidade, eficiência e recursos integrados tornam este microcontrolador ideal para aplicações que demandam um controle preciso e estável dos sinais adquiridos.
 
+_______________________________________________________________________________________________
 
 ### SENSORES E ATUADORES DA BANCADA FESTO - MPS PA COMPACT WORKSTATION
 
@@ -54,6 +56,14 @@ Dessa forma, o MSP430 se mostra uma excelente escolha para o projeto, obtendo me
 
 _____________________________________________________________________________________________
  	
- 	
+ 	| Descrição                          | Referência Datasheet     |
+|-----------------------------------|---------------------------|
+| Sensor de nível ultrassônico      | B101                      |
+| Sensores capacitivo de proximidade| B113 / B114               |
+| Interruptores de nível tipo boia  | S111 / S112               |
+| Sensor de vazão                   | B102                      |
+| Sensor de pressão                 | B103                      |
+| Sensor de temperatura             | B104                      |
+
 
 	
