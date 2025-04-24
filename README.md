@@ -2,10 +2,11 @@
 
 ## ETAPA 1:
 
+
 ### INTRODUÇÃO
 Este projeto tem como o objetivo o desenvolvimento de um sistema embarcado completo para o monitoramento e controle de variáveis físicas na bancada MPS PA Compact Workstation, da Festo. A solução proposta será capaz de controlar, em tempo real, as variáveis de temperatura e nível, utilizando sensores e atuadores já integrados  à bancada. Todo o sistema de controle será implementado do zero, com código desenvolvido pela própria equipe, utilizando o microcontrolador MSP430F5529.
 
-A arquitetura do sistema será composta por sensores analógicos e digitais conectados às entradas do microcontrolador, que serão responsáveis pela leitura contínua dos sinais de processo. Após a conversão e tratamento dos sinais, os valores medidos serão comparados com seus respectivos setpoints, definidos manualmente por meio de botões ou menus. A partir dessa comparação, o sistema executará algoritmos de controle PID que gerarão as ações de controle necessárias para acionar os elementos finais: a bomba (nível) e o aquecedor (temperatura).
+A arquitetura do sistema será composta por sensores analógicos e digitais conectados às entradas do microcontrolador, que serão responsáveis pela leitura contínua dos sinais de processo. Após a conversão e tratamento dos sinais, os valores medidos serão comparados com seus respectivos setpoints, definidos manualmente por meio de botões ou menus. A partir dessa comparação, o sistema executará algoritmos de controle PID que gerarão as ações de controle necessárias para acionar os elementos finais: a bomba (nível) e o aquecedor (temperatura). Esse ajuste permite que o sistema responda de maneira estável, ajustando os atuadores e corrigindo os desvios em tempo real conforme as medições forem feitas. O controle PID serve para garantir que as variáveis de nível e temperatura sejam mantidas de forma eficiente. 
 
 Para garantir a visibilidade e a interação com o sistema, será utilizado um módulo wifi, onde será possível visualizar as grandezas medidas, os valores de referência, os sinais de controle calculados, além de mensagens de alerta e o status atual da operação, permitindo maior mobilidade e facilidade no acompanhamento do sistema. O controle também poderá ser pausado, reiniciado ou ajustado por meio de comandos simples na interface, permitindo testes com diferentes configurações e perturbações externas.
 
