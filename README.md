@@ -21,6 +21,9 @@ O sistema será modular, permitindo a ativação ou desativação de cada contro
 O sistema de controle PID será inicialmente ajustado por meio de simulações e, posteriormente, ajustado através de testes no laboratório. Esse recurso aumentará a flexibilidade do sistema, permitindo que ele seja adaptado facilmente a diferentes cenários e condições de operação.
 Com as melhorias do firware, o sistema de controle PID proporcionará um controle mais preciso e poderão ser observador os efeitos dos ajuste no comportamento do sistema. 
 
+Foram verificados quatro possíveis circuitos de malha fechada no manual, que podem ser usados individualmente e em cascata. 
+* Sistema de controle do nível de água nos tanques; sistema de controle do fluxo de água;
+* Sistema de controle de temperatura. 
 ______________________________________________________________________________________________
 
 ### JUSTICATIVA DA ESCOLHA DO MSP430 
