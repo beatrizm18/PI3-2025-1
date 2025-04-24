@@ -141,7 +141,7 @@ O aquecimento é controlado internamente pela bancada, ativado por uma saída bi
 
 ## Tabelas de mapeamento
 
-###Terminal I/O Digital 
+### Terminal I/O Digital 
 
 ![Terminal I/O Digital](https://github.com/joananana/PI3-2024-2/raw/main/imagens/XMA1.JPG)
 
