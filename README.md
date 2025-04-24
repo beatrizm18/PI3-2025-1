@@ -73,13 +73,13 @@ O sinal de corrente analógico (4 … 40 mA) do sensor ultrassônico (1) está c
 
 ### Sensores capacitivo de proximidade - B113 / B114
 
-![Sensor de nível ultrassônico](https://github.com/joananana/PI3-2024-2/raw/main/imagens/B113_B114.JPG)
+![Sensor de proximidade](https://github.com/joananana/PI3-2024-2/raw/main/imagens/B113_B114.JPG)
 
 Dois interruptores de proximidade capacitivos, B113 (1) e B114 (2), estão localizados na lateral do tanque inferior B101 e montados em uma placa de perfil. Os interruptores de proximidade podem ser ajustados mecanicamente. A distância de detecção através da parede do tanque pode ser ajustada com um parafuso. Os sinais de entrada binários de 24V são conectados ao terminal de E/S XMA1. 
 
 ### Interruptores de nível tipo boia - S111 / S112 / S117
 
-![Sensor de nível ultrassônico](https://github.com/joananana/PI3-2024-2/raw/main/imagens/S112.JPG)
+![Interruptores de nível](https://github.com/joananana/PI3-2024-2/raw/main/imagens/S112.JPG)
 
 * **S111:** O transbordamento no tanque B101 é monitorado com o interruptor de boia. Se o nível no tanque exceder o nível máximo, o cilindro de boia transparente é empurrado para cima, ativando um contato reed. Os sinais de entrada binários de 24V (normalmente abertos) são conectados ao terminal de E/S XMA1.
 
@@ -89,19 +89,19 @@ Dois interruptores de proximidade capacitivos, B113 (1) e B114 (2), estão local
 
 ### Sensor de vazão - B102
 
-![Sensor de nível ultrassônico](https://github.com/joananana/PI3-2024-2/raw/main/imagens/B102.JPG)
+![Sensor de vazão](https://github.com/joananana/PI3-2024-2/raw/main/imagens/B102.JPG)
 
 Um sinal de onda quadrada constante do sensor de vazão está conectado a uma entrada binária no terminal de E/S XMA1 (I0). O nível do sinal depende da tensão de alimentação aplicada (8 … 24 V). O sinal de frequência também está conectado ao transformador de medição A2, que converte o sinal em uma tensão padrão de 0 a 10 V.
 
 ### Sensor de pressão - B103
 
-![Sensor de nível ultrassônico](https://github.com/joananana/PI3-2024-2/raw/main/imagens/B103.JPG)
+![Sensor de pressão](https://github.com/joananana/PI3-2024-2/raw/main/imagens/B103.JPG)
 
 O sensor de pressão (2) piezoresistivo envia um sinal analógico de 0 a 10V de acordo com a pressão no tanque B103 entre 0 e 400 mbar.
 
 ### Sensor de temperatura - B104
 
-![Sensor de nível ultrassônico](https://github.com/joananana/PI3-2024-2/raw/main/imagens/B104.JPG)
+![Sensor de TEMPERATURA](https://github.com/joananana/PI3-2024-2/raw/main/imagens/B104.JPG)
 
 A resistência do sensor de temperatura (2) está conectada ao transformador de medição A3, que converte a resistência em um sinal de tensão padrão (0 a 10 V), conectado ao terminal analógico X2 (UE4). O aquecimento é controlado por um relé interno, ativado por uma saída digital (O1 no XMA1).
 
@@ -110,22 +110,32 @@ ________________________________________________________________________________
 
 ### Bomba centrífuga - P101
 
+![bomba centrifuga](https://github.com/joananana/PI3-2024-2/raw/main/imagens/P101.JPG)
+
 A bomba(1) é acionada pelo controlador de motor A4 e pelo relé K1. Com uma saída digital (O2 no XMA1), é possível alternar entre controle binário e controle analógico (0 e 24V). No controle binário, a bomba é ligada/desligada com uma saída adicional (O3 no XMA1). No controle analógico, a tensão de acionamento define a velocidade da bomba(0 a 10V).
 
 ### Válvula proporcional para controle de vazão - V106
+
+![Válvula proporcional para controle de vazão](https://github.com/joananana/PI3-2024-2/raw/main/imagens/V106.JPG)
 
 A eletrôncia de controle da válvula é ativada com uma saída binária (O4 no XMA1). Um sinal analógico do canal 1 (UA2 no X2) aciona a válvula com um sinal padrão de 0 a 10 V. 
 
 ### Válvula esférica - V102
 
+![Válvula esférica](https://github.com/joananana/PI3-2024-2/raw/main/imagens/V102.JPG)
+
 O acessório de detecção de posição final é composto por dois micro relés elétricos. Os sinais binários de 24 VDC (S115 e S116) estão conectados como entradas no terminal de E/S XMA1. 
 
 ### Aquecedor - E104
+
+![aquecedor](https://github.com/joananana/PI3-2024-2/raw/main/imagens/E104.JPG)
 
 O aquecimento é controlado internamente pela bancada, ativado por uma saída binário (O1 no XMA1). O controle do aquecimento pode ser binário ou contínuo (modulação por largura de pulso - PWM). 
 
 
 ## Tabelas de mapeamento
+
+![tabela de mapeamento]()
 
 Terminal I/O Digital 
 
