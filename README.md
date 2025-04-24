@@ -75,11 +75,11 @@ Dois interruptores de proximidade capacitivos, B113 (1) e B114 (2), estão local
 
 ### Interruptores de nível tipo boia - S111 / S112 / S117
 
-	* **S111:** O transbordamento no tanque B101 é monitorado com o interruptor de boia. Se o nível no tanque exceder o nível máximo, o cilindro de boia transparente é empurrado para cima, ativando um contato reed. Os sinais de entrada binários de 24V (normalmente abertos) são conectados ao terminal de E/S XMA1.
+* **S111:** O transbordamento no tanque B101 é monitorado com o interruptor de boia. Se o nível no tanque exceder o nível máximo, o cilindro de boia transparente é empurrado para cima, ativando um contato reed. Os sinais de entrada binários de 24V (normalmente abertos) são conectados ao terminal de E/S XMA1.
 
-	* **S112:** Monitora o nível mínimo no tanque superior B102. Os sinais de entrada binários de 24V (normalmente fechados) são conectados ao terminal de E/S XMA1.
+* **S112:** Monitora o nível mínimo no tanque superior B102. Os sinais de entrada binários de 24V (normalmente fechados) são conectados ao terminal de E/S XMA1.
 
-	* **S117:** Monitora a diminuição do nível de enchimento do tanque B101, evitando que o aquecimento continue caso o nível fique abaixo do ponto crítico. O cabo do interruptor está conectado diretamente ao aquecimento.
+* **S117:** Monitora a diminuição do nível de enchimento do tanque B101, evitando que o aquecimento continue caso o nível fique abaixo do ponto crítico. O cabo do interruptor está conectado diretamente ao aquecimento.
 
 ### Sensor de vazão - B102
 
