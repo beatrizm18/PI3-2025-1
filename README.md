@@ -52,7 +52,7 @@ Dessa forma, o MSP430 se mostra uma excelente escolha para o projeto, obtendo me
   	* Válvula esférica - V102
    	* Aquecedor - E104
 
-
+_____________________________________________________________________________________________
  	
  	
 
