@@ -65,3 +65,24 @@ ________________________________________________________________________________
 | Sensor de pressão                      | B103                      |
 | Sensor de temperatura                  | B104                      |
 
+___________________________________________________________________________________________________________________
+
+| #  | Designator                | Description                                     | Quantity | Footprint         |
+|----|---------------------------|-------------------------------------------------|----------|-------------------|
+| 1  | C13, C14                  | CAP CER 100nF 50V X7R 0805                      | 2        | 0805C             |
+| 2  | C1, C2, C3, C4, C5, C6, C9, C10, C11, C12 | CAP CER 10nF 50V X7R 0805         | 10       | 0805C             |
+| 3  | R1, R2, R3, R4, R5, R6, R8, R9, R10, R11, R12 | RES 10K OHM 5% 1/8W 0805      | 11       | 0805R             |
+| 4  | J1                        | BRB Matekts connector, 1x2, 180°                | 1        | BRB_1X2_M         |
+| 5  | IC3, IC4, IC5, IC6, IC7, IC8, IC9, IC10, IC11, IC12, C13, C14 | Integrated Circuit PCB17C    | 12       | DIP762W60P254L854H530Q4N |
+| 6  | IC1, IC2                  | Integrated Circuit LM324N/NOPB                 | 2        | DIP794W56P254L910H530Q4N |
+| 7  | P3                        | Connector D15T08 Female, 180°, 2 Lines, 7&6 Columns, 26 Pins | 1 | ds1039             |
+| 8  | P2                        | Connector D17T08 Female, 180°, 2 Lines, 12 Columns, 24 Pins | 1 | ds1039             |
+| 9  | U1                        | IC MCU 32BIT ESP32 DEVKIT V1                   | 1        | ESP32-DEVKIT-V1   |
+| 10 | M1                        | LM2596 4 PINS                                   | 1        | MOD_LM2596        |
+| 11 | R26, R27, R35, R36        | RES 100 OHM 5% 1/8W                             | 4        | RESISTOR          |
+| 12 | R13, R14, R15, R16        | RES 10K OHM 5% 1/8W                             | 4        | RESISTOR          |
+| 13 | R28, R29, R30, R31        | RES 33K OHM 5% 1/8W                             | 4        | RESISTOR          |
+| 14 | R32, R33, R34             | RES 47K OHM 5% 1/8W                             | 3        | RESISTOR          |
+| 15 | R17, R18, R19, R20        | RES 68K OHM 5% 1/8W                             | 4        | RESISTOR          |
+| 16 | D1, D2, D3, D4            | Schottky Diode                                  | 4        | SOT95P230X110-3N  |
+
