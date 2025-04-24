@@ -19,7 +19,12 @@ O sistema será modular, permitindo a ativação ou desativação de cada contro
 	Com isso, o projeto entregará uma solução funcional de controle embarcado, implementada de forma autônoma e adaptada à estrutura real da bancada. A expectativa é obter um controle estável, responsivo e confiável, que permita atuar sobre variáveis reais de processo com precisão e repetibilidade, servindo como uma base para futuras melhorias e integrações com sistemas de supervisão.
 
 
-### JUSTICATIVA DA ESCOLHA DO MSP430
+### JUSTICATIVA DA ESCOLHA DO MSP430 
+ O MSP430 é uma família de microcontroladores desenvolvida pela Texas Instruments, reconhecida por sua alta eficiência energética e arquitetura otimizada para aplicações embarcadas de baixo consumo. Uma das principais razões para a escolha é a eficiência, que o torna adequado para projetos de monitoramento e sensores.
+A arquitetura do MSP430 foi projetada para maximizar o desempenho em aplicações analógicas e de controle com consumo mínimo. É ideal em sistemas que operam de forma contínua, mas com ciclos intermitentes de processamento.
+Além disso, o MSP430 possui conversores analógico-digital (ADC) de alta resolução, timers com capacidade de captura/compare e interfaces seriais integradas (como UART, SPI e I2C), o que permite o controle preciso de sensores analógicos e digitais sem a necessidade de circuitos externos complexos. Isso reduz o custo e a complexidade do projeto, mantendo sua robustez e confiabilidade.
+Outro ponto relevante é a ampla documentação técnica e suporte, que facilitam o desenvolvimento de aplicações. A Texas Instruments disponibiliza ferramentas gratuitas, como o Code Composer Studio (CCS) que será utilizado no desenvolvimento do projeto e diversas bibliotecas de exemplos, o que agiliza a implementação e a validação dos sistemas desenvolvidos.
+Dessa forma, o MSP430 se mostra uma excelente escolha para o projeto, obtendo medições precisas, baixo consumo de energia e operação confiável, como o analisador de parâmetros. Sua simplicidade, eficiência e recursos integrados tornam este microcontrolador ideal para aplicações que demandam um controle preciso e estável dos sinais adquiridos.
 
 
 ### SENSORES E ATUADORES DA BANCADA FESTO - MPS PA COMPACT WORKSTATION
