@@ -24,8 +24,10 @@ O sistema de controle PID será inicialmente ajustado por meio de simulações e
 Com as melhorias do firware, o sistema de controle PID proporcionará um controle mais preciso e poderão ser observador os efeitos dos ajuste no comportamento do sistema. 
 
 Foram verificados quatro possíveis circuitos de malha fechada no manual, que podem ser usados individualmente e em cascata. 
-* Sistema de controle do nível de água nos tanques; sistema de controle do fluxo de água;
-* Sistema de controle de temperatura. 
+* Sistema de controle do nível de água nos tanques;
+* sistema de controle do fluxo de água;
+* Sistema de controle de temperatura;
+* Sistema de controle de pressão. 
 ______________________________________________________________________________________________
 
 ### JUSTICATIVA DA ESCOLHA DO MSP430 
