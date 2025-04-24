@@ -32,9 +32,13 @@ ________________________________________________________________________________
 
 ### JUSTICATIVA DA ESCOLHA DO ESP32 
 O ESP32 é um microcontrolador de alto desempenho projetado para aplicações que exijam conectividade sem fio. Ele é popular IoT devido justamente a essa capacidade de se conectar a redes Wi-Fi e Bluetooth de forma eficiente, além de apresentar um desempenho para processamento e controle. 
+
 A boa razão pela escolha do ESP32 é que ele combina um processador dual-core com Wi-Fi integrado, o que permite implementar soluções de controle remoto, com a capacidade de monitoramento em tempo real via internet. Além disso, o ESP tem uma facilidade de comunicação com outros dispositivos, como sensores e atuadores, o que contribui para sistemas interconectados em ambientes de automação.
+
 Além disso, o ESP32 oferece recursos como ADC de alta resolução, interfaces seriais (UART, SPI, I2C), que permitem o controle preciso de sensores analógicos e digitais sem a necessidade de circuitos externos acoplados. A arquitetura é eficiente em termos de energia, que é crucial para dispositivos que necessitam de autonomia, sem comprometer o desempenho.
+
 O ESP32 possui também bastante documentação, que facilita o desenvolvimento de aplicações. Com a disponibilização de ferramentas como o Arduino IDE, o microcontrolador se torna acessível para desenvolvimento e prototipagem, oferecendo uma variedade de bibliotecas e exemplos para rápida implementação.
+
 A escolha do ESP32 oferece uma significativa vantagem ao projeto, em termos de conectividade, desempenho e custo-benefício. Além de permitir a integração eficiente de sistemas de monitoramento e controle com a infraestrutura da internet. Sua alta capacidade de processamento, combinada com o baixo consumo de energia, faz com que o ESP32 tenha sido escolhido para o projeto.
 
 
