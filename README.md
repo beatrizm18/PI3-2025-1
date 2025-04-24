@@ -40,7 +40,7 @@ ________________________________________________________________________________
 
 ### SENSORES E ATUADORES DA BANCADA FESTO - MPS PA COMPACT WORKSTATION
 
-### Lista de Sonsores
+### Lista de Sensores
 	* Sensor de nível ultrassônico - B101
  	* Sensoores capaciitivo de proximidade - B113/B114
   	* Interruptores de nível tipo boia - S111/ S112/ S117
