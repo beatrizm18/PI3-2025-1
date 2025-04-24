@@ -56,14 +56,13 @@ ________________________________________________________________________________
 
 _____________________________________________________________________________________________
  	
- 	| Descrição                          | Referência Datasheet     |
-|-----------------------------------|---------------------------|
-| Sensor de nível ultrassônico      | B101                      |
-| Sensores capacitivo de proximidade| B113 / B114               |
-| Interruptores de nível tipo boia  | S111 / S112               |
-| Sensor de vazão                   | B102                      |
-| Sensor de pressão                 | B103                      |
-| Sensor de temperatura             | B104                      |
-
+ 	| **Descrição**                          | **Referência Datasheet** |
+|----------------------------------------|---------------------------|
+| Sensor de nível ultrassônico           | B101                      |
+| Sensores capacitivo de proximidade     | B113 / B114               |
+| Interruptores de nível tipo boia       | S111 / S112               |
+| Sensor de vazão                        | B102                      |
+| Sensor de pressão                      | B103                      |
+| Sensor de temperatura                  | B104                      |
 
 	
