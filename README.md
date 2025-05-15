@@ -288,7 +288,7 @@ O microcontrolador utilizado foi o ESP32 DEVKIT 1. Para compilação e testes do
 Foi configurada a interface da IDE e importado o código para o teste. 
 
 <p align="center">
-  <img src="imagens/codigo.jpg" width="250"/>
+  <img src="imagens/codigo.jpg" width="600"/>
 </p>
 ### Fabricação do suporte
 Um protótipo extra de suporte foi apresentado nesta etapa, devido à problemas na confecção do suporte oficial do projeto, que será em impressão 3D e encaixará na bancada de forma adequada. 
