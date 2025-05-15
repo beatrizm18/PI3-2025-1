@@ -285,6 +285,7 @@ Para a parte de alimentação foi utilizado um módulo pronto do LM2596.
 
 ### Código
 O microcontrolador utilizado foi o ESP32 DEVKIT 1. Para compilação e testes do código do projeto, utilizaremos o ESPRESSIF IDE, que é uma IDE especifica dos ESPs. 
+Foi configurada a interface da IDE e importado o código para o teste. 
 
 ### Fabricação do suporte
 Um protótipo extra de suporte foi apresentado nesta etapa, devido à problemas na confecção do suporte oficial do projeto, que será em impressão 3D e encaixará na bancada de forma adequada. 
