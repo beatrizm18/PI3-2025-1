@@ -258,17 +258,21 @@ Retorna dado: Se é identificada uma requisição, o microcontrolador processa a
 
 Esse processo garante que o usuário consiga acessar e controlar a bancada remotamente, monitorando e ajustando os parâmetros em tempo real por meio da interface web.
 
+### Interface usuário/bancada
+
+Foi definido que a interação do usuário com a bancada da FESTO vai ser via servidor web, como foi a da equipe do projeto anterior. O servidor possui alguns botões que permitem acionar algumas válvulas e captura dados em tempo real.
+
 ### Otimização da PCB
 
 No projeto anterior, o optoacoplador (mostrado na imagem abaixo) não fornecia corrente o suficiente para acionar a válvula esférica, para corrigir esse problema, adicionamos um circuito pull-up, que consegue entregar para a válvula os 200mA necessários.
 Verificamos que o resistor de 10 kΩ presente na entrada do optoacoplador no circuito digital de acionamento (como mostrado na imagem abaixo) não fornecia corrente suficiente para polarizar o transistor na saída do optoacoplador, o que limitava a tensão de saída. Para a produção da placa, substituímos esse resistor por um de 1 kΩ
 
-### Interface usuário/bancada
-
-Foi definido que a interação do usuário com a bancada da FESTO vai ser via servidor web, como foi a da equipe do projeto anterior. O servidor possui alguns botões que permitem acionar algumas válvulas e captura dados em tempo real.
 
 ### Fabricação da PCB
 
+<p align="center">
+  <img src="imagens/esquemtico.pdf" width="250"/>
+</p>
 
 Esquemático do circuito:
 Na primeira etapa para a execução da placa foi importar o esquemático do projeto anterior, fazendo as alterações descritas no tópico de Otimização da PCB. 
