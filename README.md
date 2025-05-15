@@ -293,7 +293,12 @@ Foi configurada a interface da IDE e importado o código para o teste.
   <img src="imagens/codigo.jpg" width="600"/>
 </p>
 ### Fabricação do suporte
-Um protótipo extra de suporte foi apresentado nesta etapa, devido à problemas na confecção do suporte oficial do projeto, que será em impressão 3D e encaixará na bancada de forma adequada. 
+Um protótipo extra de suporte foi apresentado nesta etapa, devido à problemas na confecção do suporte oficial do projeto, que será em impressão 3D e encaixará na bancada de forma adequada. ]
+
+<p align="center">
+  <img src="imagens/fabricacao_do_suporte.jpg
+" width="600"/>
+</p>
 
 
 
