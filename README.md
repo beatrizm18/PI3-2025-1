@@ -238,3 +238,14 @@ ___________________
 
 ### Fluxograma
 ![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/fluxograma.png?raw=true)
+
+### Otimização da PCB
+
+### Fabricação da PCB
+
+
+Esquemático do circuito:
+Na primeira etapa para a execução da placa foi importar o esquemático do projeto anterior, fazendo as alterações descritas no tópico de Otimização da PCB. 
+
+Para a comunicação digital foram utilizados circuitos de chaveamento com optoacopladores para adequar os niveis de tensão de 24V
+
