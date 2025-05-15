@@ -241,11 +241,27 @@ ___________________
 
 ### Otimização da PCB
 
+No projeto anterior, o optoacoplador (mostrado na imagem abaixo) não fornecia corrente o suficiente para acionar a válvula esférica, para corrigir esse problema, adicionamos um circuito pull-up, que consegue entregar para a válvula os 200mA necessários.
+Verificamos que o resistor de 10 kΩ presente na entrada do optoacoplador no circuito digital de acionamento (como mostrado na imagem abaixo) não fornecia corrente suficiente para polarizar o transistor na saída do optoacoplador, o que limitava a tensão de saída. Para a produção da placa, substituímos esse resistor por um de 1 kΩ
+
+
 ### Fabricação da PCB
 
 
 Esquemático do circuito:
 Na primeira etapa para a execução da placa foi importar o esquemático do projeto anterior, fazendo as alterações descritas no tópico de Otimização da PCB. 
 
-Para a comunicação digital foram utilizados circuitos de chaveamento com optoacopladores para adequar os niveis de tensão de 24V
+Para a comunicação digital foram utilizados circuitos de chaveamento com optoacopladores para adequar os niveis de tensão de 24V.
+
+Na parte analógica utilizamos amplificadores operacionais não inversores convertendo o sinal de 3,3V para 10V nas saídas. É um divisor resistivo junto de um circuito de proteção da ESP32 utilizando diodos e um amplificador operacional como seguidor de tensão.
+Para a parte de alimentação foi utilizado um módulo pronto do LM2596.
+
+
+### Código
+O microcontrolador utilizado foi o ESP32 DEVKIT 1. Para compilação e testes do código do projeto, utilizaremos o ESPRESSIF IDE, que é uma IDE especifica dos ESPs. 
+
+### Fabricação do suporte
+Um protótipo extra de suporte foi apresentado nesta etapa, devido à problemas na confecção do suporte oficial do projeto, que será em impressão 3D e encaixará na bancada de forma adequada. 
+
+
 
