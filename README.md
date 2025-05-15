@@ -281,7 +281,9 @@ Para a comunicação digital foram utilizados circuitos de chaveamento com optoa
 
 Na parte analógica utilizamos amplificadores operacionais não inversores convertendo o sinal de 3,3V para 10V nas saídas. É um divisor resistivo junto de um circuito de proteção da ESP32 utilizando diodos e um amplificador operacional como seguidor de tensão.
 Para a parte de alimentação foi utilizado um módulo pronto do LM2596.
-
+<p align="center">
+  <img src="imagens/3D da placa.jpg" width="600"/>
+</p>
 
 ### Código
 O microcontrolador utilizado foi o ESP32 DEVKIT 1. Para compilação e testes do código do projeto, utilizaremos o ESPRESSIF IDE, que é uma IDE especifica dos ESPs. 
