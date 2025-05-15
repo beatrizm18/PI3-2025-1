@@ -271,7 +271,11 @@ Verificamos que o resistor de 10 kΩ presente na entrada do optoacoplador no cir
 ### Fabricação da PCB
 
 <p align="center">
-  <img src="imagens/esquemtico.pdf" width="250"/>
+  <img src="imagens/esquematico.pdf" width="250"/>
+</p>
+
+<p align="center">
+  <img src="imagens/3D da placa.pdf" width="250"/>
 </p>
 
 Esquemático do circuito:
