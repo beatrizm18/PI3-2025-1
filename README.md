@@ -320,6 +320,8 @@ Após testes realizados na placa, foi notado que a corrente na entrada dos optoa
 
 ## Substituição do suporte
 
+A fabricação do suporte era incialmente desenvolvida em impressão 3D, após modificarmos a placa, decidimos construir um suporte feio de chapas de mdf, cortadas e posicionas na melhor posição para uma boa fixação na bancada.
+
 ## Controle PID
 
 ## 
