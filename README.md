@@ -266,15 +266,12 @@ Foi definido que a interação do usuário com a bancada da FESTO vai ser via se
 
 No projeto anterior, o optoacoplador (mostrado na imagem abaixo) não fornecia corrente o suficiente para acionar a válvula esférica, para corrigir esse problema, adicionamos um circuito de driver de corrente com resistor de pull up, que consegue entregar para a válvula os 200mA necessários.
 Verificamos que o resistor de 10 kΩ presente na entrada do optoacoplador no circuito digital de acionamento (como mostrado na imagem abaixo) não fornecia corrente suficiente para polarizar o transistor na saída do optoacoplador, o que limitava a tensão de saída. Para a produção da placa, substituímos esse resistor por um de 1 kΩ
-<p align="center">
-  <img src="imagens/otimizacaopcb.pdf" width="250"/>
-</p>
+
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/pull.jpg)
 
 
 ### Fabricação da PCB
 
-
-![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/SUPORTEBANCADA.jpg)
 
 ![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/SUPORTECABOS.jpg)
 
@@ -286,9 +283,7 @@ Para a comunicação digital foram utilizados circuitos de chaveamento com optoa
 Na parte analógica utilizamos amplificadores operacionais não inversores convertendo o sinal de 3,3V para 10V nas saídas. É um divisor resistivo junto de um circuito de proteção da ESP32 utilizando diodos e um amplificador operacional como seguidor de tensão.
 Para a parte de alimentação foi utilizado um módulo pronto do LM2596.
 
-<p align="center">
-  <img src="imagens/esquematicocompleto.pdf" width="250"/>
-</p>
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/esquematicoCOMPLETO.jpg)
 
 <p align="center">
   <img src="imagens/3D da placa.jpg" width="600"/>
@@ -317,6 +312,10 @@ Após testes realizados na placa, foi notado que a corrente na entrada dos optoa
 ## Substituição do suporte
 
 A fabricação do suporte era incialmente desenvolvida em impressão 3D, após modificarmos a placa, decidimos construir um suporte feito de chapas de mdf, cortadas e posicionas na melhor posição para uma boa fixação na bancada.
+
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/suporteatualizado.jpg)
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/SUPORTEBANCADA.jpg)
+
 
 ## Controle PID
 
