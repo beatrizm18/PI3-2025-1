@@ -273,17 +273,10 @@ Verificamos que o resistor de 10 kΩ presente na entrada do optoacoplador no cir
 
 ### Fabricação da PCB
 
-<p align="center">
-  <img src="SUPORTEBANCADA.jpg" width="250"/>
-</p>
 
-imagens/SUPORTEBANCADA.jpg
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/SUPORTEBANCADA.jpg)
 
-![Minha Imagem](SUPORTEBANCADA.jpg)
-
-<p align="center">
-  <img src="SUPORTECABOS.jpg" width="250"/>
-</p>
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/SUPORTECABOS.jpg)
 
 Esquemático do circuito:
 Na primeira etapa para a execução da placa foi importar o esquemático do projeto anterior, fazendo as alterações descritas no tópico de Otimização da PCB. 
