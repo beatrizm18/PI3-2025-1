@@ -313,4 +313,13 @@ Um protótipo extra de suporte foi apresentado nesta etapa, devido à problemas 
 </p>
 
 
+## ETAPA 3:
 
+## Otimização da PCB anterior
+Após testes realizados na placa, foi notado que a corrente na entrada dos optoacopladores do circuito digital de acionamento não estava suprindo a corrente necessária para polarizar o transistor, para corrigir isso, o resistor de entrada do optoacoplador foi alterado para 330 Ω. Além da adição do circuito de driver de corrente com resistor de pull up, para entregar para a válvula os 200mA necessários, como já explicado na etapa 2. 
+
+## Substituição do suporte
+
+## Controle PID
+
+## 
