@@ -277,6 +277,10 @@ Verificamos que o resistor de 10 kΩ presente na entrada do optoacoplador no cir
   <img src="SUPORTEBANCADA.jpg" width="250"/>
 </p>
 
+imagens/SUPORTEBANCADA.jpg
+
+![Minha Imagem](SUPORTEBANCADA.jpg)
+
 <p align="center">
   <img src="SUPORTECABOS.jpg" width="250"/>
 </p>
