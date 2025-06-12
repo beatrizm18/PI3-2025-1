@@ -313,7 +313,7 @@ Após testes realizados na placa, foi notado que a corrente na entrada dos optoa
 
 A fabricação do suporte era incialmente desenvolvida em impressão 3D, após modificarmos a placa, decidimos construir um suporte feito de chapas de mdf, cortadas e posicionas na melhor posição para uma boa fixação na bancada.
 
-![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/suporteatualizado.jpg)
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/SUPOOOOOORTE.jpg)
 ![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/SUPORTEBANCADA.jpg)
 
 
