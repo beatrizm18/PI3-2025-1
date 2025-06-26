@@ -365,6 +365,7 @@ Para solucionarmos tal problema, definimos o uso do controle por histerese, que 
 
 O controle do sensor ultrassônico foi feito de forma que, quando o valor lido pelo sensor for maior que 1000, a bomba desligava. Caso contrário, com uma margem de segurança de 200, ou seja, abaixo de 800, ele aciona a bomba. 
 
+Na próxima etapa, será implementado o controle das outras variáveis do sistema. Para isso, precisaremos verificar os motivos pelos quais alguns dos outros sensores (conforme tabela de funcionamento feita acima) não estão funcionando adequadamente. 
 
 
 
