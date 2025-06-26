@@ -325,14 +325,36 @@ Foi feita uma tabela com esse monitoramento.
 
 Além disso, fizemos a conversão do valor recebido pelo adc para descobrir o valor em litros para o nível, bar para pressão e m³/s para vazão, de forma que o valor impresso na página web fosse visualizado na forma do sistema internacional de unidade de medida.
 
+## Testes para conversão de medidas
 
+Sensor de nível B102
 
+| Nível        |  ADC     | 
+| Mínimo 0     |   100    | 
+| Médio  5     |  2000    | 
+| Máximmo 10   |   4000   | 
 
+Dessa forma, analisamos os valores e verificamos que o valor 400 no adc equivale à 1 litro. 
 
-## Controle dos sensores e atuadores
+Sensor de pressão B103
+
+| Pressão       |  ADC     | 
+| Mínimo 0      |   0      | 
+| 0.225 Bar     |  2250    | 
+
+No caso da pressão, tivemos dificuldade nos cálculos, pois a variável estava sendo armazenada em um inteiro, e, para alterar essa variável, seriam necessárias muitas modificações em código e tipos de variáveis. 
+
+## Controle do sensor ultrassônico
+
 Verificamos que a implementação do PID era inviável, visto que o tempo de resposta de alguns sensores do equipamento é muito lento. Além disso, a imprecisão dos sensores, fez com que a implementação do método PID não fosse a melhor opção para o nosso projeto. 
 
-Para solucionarmos tal problema, definimos o uso do controle por histerese, que é um modo de controle ON/OFF, contendo uma margem de segurança para evitar uma mudança abrupta na troca de estados da bomba (ligado e desligado) e, evitando assim, que a bomba fosse danificada. 
+Para solucionarmos tal problema, definimos o uso do controle por histerese, que é um modo de controle ON/OFF, contendo uma margem de segurança para evitar uma mudança abrupta na troca de estados da bomba (ligado e desligado) e, evitando assim, que a bomba seja danificada. 
+
+O controle do sensor ultrassônico foi feito de forma que, quando o valor lido pelo sensor for maior que 1000, a bomba desligava. Caso contrário, com uma margem de segurança de 200, ou seja, abaixo de 800, ele aciona a bomba. 
+
+
+
+
 
 
 
