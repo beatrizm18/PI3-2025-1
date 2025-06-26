@@ -324,8 +324,9 @@ Inicialmente, ligamos a bancada e fizemos a conexão com a nossa placa. A montag
 
 Nesta etapa, para conseguirmos fazer a parte de controle dos sensores e atuadores, nosso objetivo foi verificar quais sensores estavam devidamente funcionando e nos permitiriam fazer esta próxima etapa. 
 
-[Assista ao vídeo](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/videotestepressao.mp4)
-
+[Vídeo do sensor de pressão](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/videotestepressao.mp4)
+[Vídeo da bomba funcionando](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/bombafuncionando.mp4)
+[Vídeo do sensor ultrassõnico](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/ultrassonicofuncionando.mp4)
 
 Foi feita uma tabela com esse monitoramento.
 
