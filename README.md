@@ -317,6 +317,8 @@ A fabricação do suporte era incialmente desenvolvida em impressão 3D, após m
 ![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/SUPORTEBANCADA.jpg)
 
 
+## Teste prático
+
 Nesta etapa, para conseguirmos fazer a parte de controle dos sensores e atuadores, nosso objetivo foi verificar quais sensores estavam devidamente funcionando e nos permitiriam fazer esta próxima etapa. 
 Foi feita uma tabela com esse monitoramento.
 | **Componente**                        | **Código**  | **Status** |
@@ -344,7 +346,7 @@ Sensor de nível B102
 |--------------|----------|
 | Mínimo 0     |   100    | 
 | Médio  5     |  2000    | 
-| Máximmo 10   |   4000   | 
+| Máximo 10   |   4000   | 
 
 Dessa forma, analisamos os valores e verificamos que o valor 400 no adc equivale à 1 litro. 
 
