@@ -365,8 +365,8 @@ Verificamos que a implementação do PID era inviável, visto que o tempo de res
      		O sistema é monitorado constantemente e, quando o limite superior é excedido, o sistema desliga, reduzindo o valor da variável. E, quando este valor cai abaixo do limite inferior, o controle atua de maneira a aumentar o valor da variável. 
 		Existe uma margem de segurança entre os limites superior e inferior, chamada banda morta, que evita uma mudança abrupta na troca de estados da bomba (ligado e desligado). Isso evita que a bomba seja danificada.
 
-O controle do sensor ultrassônico foi feito de forma que, quando o valor lido pelo sensor for maior que 1000, a bomba desligava. Caso contrário, com uma margem de segurança de 200, ou seja, abaixo de 800, ele aciona a bomba. 
-
+O controle do sensor ultrassônico foi feito de forma que, quando o valor lido pelo sensor fosse maior que 1000, a bomba desligava. Caso contrário, com uma margem de segurança de 200, ou seja, abaixo de 800, ele acionava a bomba. 
+Isso garante que o sistema funcione com segurança e não fique acionando e desligando o sistema constantemente. 
 
 
 
