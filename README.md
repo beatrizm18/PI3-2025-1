@@ -306,7 +306,18 @@ Um protótipo extra de suporte foi apresentado nesta etapa, devido à problemas 
 
 ## ETAPA 3:
 
-## Nesta etapa, para conseguirmos fazer a parte de controle dos sensores e atuadores, nosso objetivo foi verificar quais sensores estavam devidamente funcionando e nos permitiriam fazer esta próxima etapa. 
+## Otimização da PCB anterior
+Após testes realizados na placa, foi notado que a corrente na entrada dos optoacopladores do circuito digital de acionamento não estava suprindo a corrente necessária para polarizar o transistor, para corrigir isso, o resistor de entrada do optoacoplador foi alterado para 330 Ω. Além da adição do circuito de driver de corrente com resistor de pull up, para entregar para a válvula os 200mA necessários, como já explicado na etapa 2. 
+
+## Substituição do suporte
+
+A fabricação do suporte era incialmente desenvolvida em impressão 3D, após modificarmos a placa, decidimos construir um suporte feito de chapas de mdf, cortadas e posicionas na melhor posição para uma boa fixação na bancada.
+
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/SUPOOOOOORTE.jpg)
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/SUPORTEBANCADA.jpg)
+
+
+Nesta etapa, para conseguirmos fazer a parte de controle dos sensores e atuadores, nosso objetivo foi verificar quais sensores estavam devidamente funcionando e nos permitiriam fazer esta próxima etapa. 
 Foi feita uma tabela com esse monitoramento.
 | **Componente**                        | **Código**  | **Status** |
 |---------------------------------------|-------------|------------|
@@ -363,17 +374,7 @@ O controle do sensor ultrassônico foi feito de forma que, quando o valor lido p
 
 
 
-## Otimização da PCB anterior
-Após testes realizados na placa, foi notado que a corrente na entrada dos optoacopladores do circuito digital de acionamento não estava suprindo a corrente necessária para polarizar o transistor, para corrigir isso, o resistor de entrada do optoacoplador foi alterado para 330 Ω. Além da adição do circuito de driver de corrente com resistor de pull up, para entregar para a válvula os 200mA necessários, como já explicado na etapa 2. 
-
-## Substituição do suporte
-
-A fabricação do suporte era incialmente desenvolvida em impressão 3D, após modificarmos a placa, decidimos construir um suporte feito de chapas de mdf, cortadas e posicionas na melhor posição para uma boa fixação na bancada.
-
-![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/SUPOOOOOORTE.jpg)
-![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/SUPORTEBANCADA.jpg)
 
 
-## Controle PID
 
-## 
+
