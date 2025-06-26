@@ -323,6 +323,10 @@ Inicialmente, ligamos a bancada e fizemos a conexão com a nossa placa. A montag
 ![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/bancadapronta.jpg)
 ![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/placanabancada.jpg)
 
+A página web, que monitora os valores lidos pelos sensores e contém os botões de acionamento, pode ser vista na figura abaixo. 
+
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/paginaweb.png)
+
 Nesta etapa, para conseguirmos fazer a parte de controle dos sensores e atuadores, nosso objetivo foi verificar quais sensores estavam devidamente funcionando e nos permitiriam fazer esta próxima etapa. 
 
 [Vídeo do sensor de pressão](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/videotestepressao.mp4)
