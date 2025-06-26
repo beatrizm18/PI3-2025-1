@@ -359,13 +359,22 @@ No caso da pressão, tivemos dificuldade nos cálculos, pois a variável estava 
 
 ## Controle do sensor ultrassônico
 
-Verificamos que a implementação do PID era inviável, visto que o tempo de resposta de alguns sensores do equipamento é muito lento. Além disso, a imprecisão dos sensores, fez com que a implementação do método PID não fosse a melhor opção para o nosso projeto. 
-
-Para solucionarmos tal problema, definimos o uso do controle por histerese, que é um modo de controle ON/OFF, contendo uma margem de segurança para evitar uma mudança abrupta na troca de estados da bomba (ligado e desligado) e, evitando assim, que a bomba seja danificada. 
+Verificamos que a implementação do PID era inviável, visto que o tempo de resposta de alguns sensores do equipamento é muito lento. Além disso, a imprecisão dos sensores, fez com que a implementação do método PID não fosse a melhor opção para o nosso projeto. Para solucionarmos tal problema, definimos o uso do controle por histerese.
+	### Funcionamento do controle por histerese:
+  		O controle por histerese é feito de maneira que uma variável é controlada para permanecer em uma faixa de valores desejada. É definido um limite superior e inferior para a variável e o sistema atua quando estes limites forem excedidos. 
+     		O sistema é monitorado constantemente e, quando o limite superior é excedido, o sistema desliga, reduzindo o valor da variável. E, quando este valor cai abaixo do limite inferior, o controle atua de maneira a aumentar o valor da variável. 
+		Existe uma margem de segurança entre os limites superior e inferior, chamada banda morta, que evita uma mudança abrupta na troca de estados da bomba (ligado e desligado). Isso evita que a bomba seja danificada.
 
 O controle do sensor ultrassônico foi feito de forma que, quando o valor lido pelo sensor for maior que 1000, a bomba desligava. Caso contrário, com uma margem de segurança de 200, ou seja, abaixo de 800, ele aciona a bomba. 
 
+
+
+
+## Próximos passos:
+
 Na próxima etapa, será implementado o controle das outras variáveis do sistema. Para isso, precisaremos verificar os motivos pelos quais alguns dos outros sensores (conforme tabela de funcionamento feita acima) não estão funcionando adequadamente. 
+No caso do sensor de vazão, o sensor em si está funcionando, mas a válvula esférica, que faz parte do circuito de controle deste sistema não está ativando corretamente. O sensor de temperatura se encontra num estado flutuante e também precisa ser verificado antes de podermos fazer a ativação do controle. 
+
 
 
 
