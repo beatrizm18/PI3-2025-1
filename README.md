@@ -330,6 +330,7 @@ Além disso, fizemos a conversão do valor recebido pelo adc para descobrir o va
 Sensor de nível B102
 
 | Nível        |  ADC     | 
+|--------------|----------|
 | Mínimo 0     |   100    | 
 | Médio  5     |  2000    | 
 | Máximmo 10   |   4000   | 
@@ -339,6 +340,7 @@ Dessa forma, analisamos os valores e verificamos que o valor 400 no adc equivale
 Sensor de pressão B103
 
 | Pressão       |  ADC     | 
+|---------------|----------|
 | Mínimo 0      |   0      | 
 | 0.225 Bar     |  2250    | 
 
