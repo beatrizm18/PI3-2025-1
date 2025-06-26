@@ -307,11 +307,12 @@ Um protótipo extra de suporte foi apresentado nesta etapa, devido à problemas 
 ## ETAPA 3:
 
 ## Otimização da PCB anterior
-Após testes realizados na placa, foi notado que a corrente na entrada dos optoacopladores do circuito digital de acionamento não estava suprindo a corrente necessária para polarizar o transistor, para corrigir isso, o resistor de entrada do optoacoplador foi alterado para 330 Ω. Além da adição do circuito de driver de corrente com resistor de pull up, para entregar para a válvula os 200mA necessários, como já explicado na etapa 2. 
+Na PCB que foi desenvolvida na etapa 2, verificamos alguns erros, como tamanho de footprint de conectores, do ESP e a placa não estava funcionando corretamente. 
+Então, para esta etapa, foi desenvolvida uma nova placa, onde os erros foram consertados e optamos pela utilização de alguns componentes SMD, para que fosse mais fácil fazer a conexão dos cabos da bancada nos conectores da placa. 
 
 ## Substituição do suporte
 
-A fabricação do suporte era incialmente desenvolvida em impressão 3D, após modificarmos a placa, decidimos construir um suporte feito de chapas de mdf, cortadas e posicionas na melhor posição para uma boa fixação na bancada.
+A fabricação do suporte foi inicialmente desenvolvida em impressão 3D. Após modificarmos a placa, decidimos, por questões de estabilidade, construir um suporte feito de chapas de mdf, cortadas em laboratório e posicionadas na melhor posição para uma boa fixação na bancada. 
 
 ![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/SUPOOOOOORTE.jpg)
 ![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/SUPORTEBANCADA.jpg)
