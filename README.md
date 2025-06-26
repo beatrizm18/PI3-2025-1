@@ -324,6 +324,8 @@ Inicialmente, ligamos a bancada e fizemos a conexão com a nossa placa. A montag
 
 Nesta etapa, para conseguirmos fazer a parte de controle dos sensores e atuadores, nosso objetivo foi verificar quais sensores estavam devidamente funcionando e nos permitiriam fazer esta próxima etapa. 
 
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/videotestepressao.mp4)
+
 Foi feita uma tabela com esse monitoramento.
 
 | **Componente**                        | **Código**  | **Status** |
