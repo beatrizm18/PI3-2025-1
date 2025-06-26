@@ -306,6 +306,39 @@ Um protótipo extra de suporte foi apresentado nesta etapa, devido à problemas 
 
 ## ETAPA 3:
 
+## Nesta etapa, para conseguirmos fazer a parte de controle dos sensores e atuadores, nosso objetivo foi verificar quais sensores estavam devidamente funcionando e nos permitiriam fazer esta próxima etapa. 
+Foi feita uma tabela com esse monitoramento.
+| **Componente**                        | **Código**  | **Status** |
+|---------------------------------------|-------------|------------|
+| Bomba                                 | P101        | OK         |
+| Aquecedor                             | E104        | OK         | 
+| Válvula proporcional                  | M106        | NÃO        |
+| Solenoide                             | V106        | OK         | 
+| Sensor de temperatura                 | B104        | NÃO        | 
+| Sensor de pressão                     | B103        | OK         | 
+| Sensor Ultrassônico                   | B101        | OK         | 
+| Sensor de Vazão                       | B102        | OK         | 
+| Capacitivo tanque inferior            | B113        | NÃO        | 
+| Capacitivo tanque superior            | B113        | NÃO        | 
+| Boia de nivel tanque inferior         | S111        | NÃO        | 
+| Boia de nivel tanque superior         | S112        | NÃO        | 
+
+Além disso, fizemos a conversão do valor recebido pelo adc para descobrir o valor em litros para o nível, bar para pressão e m³/s para vazão, de forma que o valor impresso na página web fosse visualizado na forma do sistema internacional de unidade de medida.
+
+
+
+
+
+## Controle dos sensores e atuadores
+Verificamos que a implementação do PID era inviável, visto que o tempo de resposta de alguns sensores do equipamento é muito lento. Além disso, a imprecisão dos sensores, fez com que a implementação do método PID não fosse a melhor opção para o nosso projeto. 
+
+Para solucionarmos tal problema, definimos o uso do controle por histerese, que é um modo de controle ON/OFF, contendo uma margem de segurança para evitar uma mudança abrupta na troca de estados da bomba (ligado e desligado) e, evitando assim, que a bomba fosse danificada. 
+
+
+
+
+
+
 ## Otimização da PCB anterior
 Após testes realizados na placa, foi notado que a corrente na entrada dos optoacopladores do circuito digital de acionamento não estava suprindo a corrente necessária para polarizar o transistor, para corrigir isso, o resistor de entrada do optoacoplador foi alterado para 330 Ω. Além da adição do circuito de driver de corrente com resistor de pull up, para entregar para a válvula os 200mA necessários, como já explicado na etapa 2. 
 
