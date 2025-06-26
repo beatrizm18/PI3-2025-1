@@ -320,9 +320,12 @@ A fabricação do suporte era incialmente desenvolvida em impressão 3D, após m
 ## Teste prático
 Inicialmente, ligamos a bancada e fizemos a conexão com a nossa placa. A montagem pode ser visualizada nas imagens abaixo:
 ![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/bancadapronta.jpg)
-![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/placabancada.jpg)
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/placanabancada.jpg)
+
 Nesta etapa, para conseguirmos fazer a parte de controle dos sensores e atuadores, nosso objetivo foi verificar quais sensores estavam devidamente funcionando e nos permitiriam fazer esta próxima etapa. 
+
 Foi feita uma tabela com esse monitoramento.
+
 | **Componente**                        | **Código**  | **Status** |
 |---------------------------------------|-------------|------------|
 | Bomba                                 | P101        | OK         |
