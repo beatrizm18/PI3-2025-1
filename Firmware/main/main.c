@@ -671,11 +671,11 @@ void app_main(void)
 
         // Se o controle PID indicar, liga a bomba
         if (controle_pid > 0.8f && !bomba_ligada) {
-          //  gpio_set_level(M1, 1);  // Liga a bomba
+            gpio_set_level(M1, 1);  // Liga a bomba
             bomba_ligada = true;
             printf("Bomba ligada, controle PID: %f\n", controle_pid);
         } else if (controle_pid <= 0.8f && bomba_ligada) {
-         //   gpio_set_level(M1, 0);  // Desliga a bomba
+            gpio_set_level(M1, 0);  // Desliga a bomba
             bomba_ligada = false;
             printf("Bomba desligada, controle PID: %f\n", controle_pid);
         }
