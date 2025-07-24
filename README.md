@@ -409,6 +409,22 @@ O uso do termo derivativo não se justifica nesse tipo de aplicação. Esse term
 Já o controle proporcional responde diretamente ao erro atual, enquanto o termo integral (I) corrige desvios que permanecem ao longo do tempo. A combinação desses dois termos é suficiente para garantir um controle estável, eficaz e mais simples de implementar, atendendo bem aos requisitos do sistema.
 
 
+### Sistema de nível 
+Para o desenvolvimento do controle PI do sistema, foram analisados os componentes necessários, que incluem o sensor de nível B101, a bomba P101 e o M1, responsável pelo controle da bomba.
+
+Definimos inicialmente os parâmetros de Kp e Ki ideais, que foram ajustados conforme a resposta do sistema. A variável "leitura_ultrassom" foi criada para armazenar o valor lido pelo ADC (Conversor Analógico-Digital), representando o nível do reservatório. Além disso, definimos um setpoint, que corresponde ao valor máximo que o ADC pode ler para manter a bomba ligada; caso o valor lido pelo ADC ultrapasse esse limite, a bomba é desligada.
+
+Com base nesses dois valores (leitura_ultrassom e setpoint), o erro do nível é calculado. Esse erro é então utilizado para calcular o erro integral, que contribui para o ajuste contínuo do sistema ao longo do tempo.
+
+A equação do controle PI é dada por:
+
+controle=𝐾𝑝nivel×erronivel + 𝐾𝑖nivel×erro integralnivel
+
+Com essa leitura é feita a cada um segundo, esse valor de controle vai alterando ao longo do tempo. Por isso, na nossa main, foi desenvolvido um código que define que quando o valor de controle for maior do que 0.8 e a bomba estiver ligada, ela permanece ligada. E se o valor for menor que 0.8 e a bomba estiver ligada, o sistema força a bomba a parar. 
+
+
+
+
 
 
 
