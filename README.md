@@ -396,7 +396,7 @@ No caso do sensor de vazão, o sensor em si está funcionando, mas a válvula es
 
 
 
-## Etapa 4 - Consolidação do Projeto
+# Etapa 4 - Consolidação do Projeto
 
 Nesta etapa, foram desenvolvidos os circuitos de controle PID para os diferentes sensores utilizados no sistema. O desenvolvimento iniciou-se com o controle aplicado ao sensor de nível ultrassônico (B101), que controla a bomba P101.
 
@@ -409,18 +409,46 @@ O uso do termo derivativo não se justifica nesse tipo de aplicação. Esse term
 Já o controle proporcional responde diretamente ao erro atual, enquanto o termo integral (I) corrige desvios que permanecem ao longo do tempo. A combinação desses dois termos é suficiente para garantir um controle estável, eficaz e mais simples de implementar, atendendo bem aos requisitos do sistema.
 
 
-### Sistema de nível 
-Para o desenvolvimento do controle PI do sistema, foram analisados os componentes necessários, que incluem o sensor de nível B101, a bomba P101 e o M1, responsável pelo controle da bomba.
+## Sistema de nível 
 
-Definimos inicialmente os parâmetros de Kp e Ki ideais, que foram ajustados conforme a resposta do sistema. A variável "leitura_ultrassom" foi criada para armazenar o valor lido pelo ADC (Conversor Analógico-Digital), representando o nível do reservatório. Além disso, definimos um setpoint, que corresponde ao valor máximo que o ADC pode ler para manter a bomba ligada; caso o valor lido pelo ADC ultrapasse esse limite, a bomba é desligada.
+### Desenvolvimento do controle PI
 
-Com base nesses dois valores (leitura_ultrassom e setpoint), o erro do nível é calculado. Esse erro é então utilizado para calcular o erro integral, que contribui para o ajuste contínuo do sistema ao longo do tempo.
+Para o desenvolvimento do controle PI do sistema, foram analisados os componentes necessários: o sensor de nível B101, a bomba P101 e o M1, que é o módulo responsável pelo controle da bomba.
+
+### Definição dos Parâmetros e Leitura do Sensor
+
+Inicialmente, foram definidos os parâmetros Kp e Ki ideais para o controle proporcional e integral, respectivamente. Esses valores foram ajustados com base na resposta observada do sistema, procurando um equilibrio entre uma resposta rápida e a correção dos erros persistentes (I).
+A variável "leitura_ultrassom" foi criada para armazenar o valor lido pelo ADC, que converte o sinal analógico do snesor de nível para um valor digital. Esse valor representa o nível do reservatório, e serve como base para o cálculo do erro do nível, que é a diferença entre o valor lido e o setpoint. 
+O setpoint foi definido como o valor máximo que o ADC pode ler para manter a bomba ligada. Caso o valor lido pelo ADC ultrapasse o setpoint, a bomba será desligada. 
+
+
+### Cálculo do Erro e Erro Integral
+Com base na leitura_ultrassom e no setpoint, o erro do nível é calculado a cada leitura, representando a diferença entre o valor atual de nível e o valor desejado (setpoint). Este erro é então acumulado ao longo do tempo para calcular o erro integral, que representa o somatório do erro passado e é utilizado para corrigir desvios persistentes. 
+
+
+### Equação do Controle PI
 
 A equação do controle PI é dada por:
 
-controle=𝐾𝑝nivel×erronivel + 𝐾𝑖nivel×erro integralnivel
+ controle=𝐾𝑝_nivel × erro_nivel + 𝐾𝑖_nivel × erro_integral_nivel
+	* O termo proporcional respondde ao erro atual, ajustando rapidamente a ação do sistema de acordo com a diferença entre o valor desejado e o valor medido. 
+ 	* O termo integral acumula o erro ao longo do tempo, ajudando a corrigir pequenos desvios que o termo proporcional não consegue eliminar sozinho. 
 
-Com essa leitura é feita a cada um segundo, esse valor de controle vai alterando ao longo do tempo. Por isso, na nossa main, foi desenvolvido um código que define que quando o valor de controle for maior do que 0.8 e a bomba estiver ligada, ela permanece ligada. E se o valor for menor que 0.8 e a bomba estiver ligada, o sistema força a bomba a parar. 
+### Lógica de Acionamento e Desligamento da Bomba
+
+O controle PI é calculado a cada um segundo, e esse valor de controle vai se alterando conforme o erro do sistema e o erro acumulado. A lógica de controle foi implementada para garantir que a bomba opere de maneira estável, evitando acionamentos/desligamentos constantes. 
+O código da função main foi estruturado da seguinte forma:
+	* Quando o valor de controle for maior que 0.8 e a bomba estiver ligada, o sistema mantém a bomba ligada. Isso acontece porque o controle PI indica que o nível do reservatório está dentro do intervalo desejado, ou que o erro é pequeno o suficiente para manter a bomba em operação. 
+ 	* Quando o valor do controle for menor que 0.8 e a bomba estiver ligada, o sistema força o desligamento da bomba. Isso acontece porque o controle PI está indicando que o nível do reservatório atingiu um valor adequado e não há mais necessidade de acionar a bomba. 
+
+Essa lógica garante que a bomba seja desligada quando o nível estiver adequado e acionada quando necessário, mas sem oscilações constantes ou liga/desliga de forma excessiva. 
+
+### Dinâmica do Sistema 
+
+	* O erro integral garante que, mesmo que haja pequenas flutuações no nível do reservatório, o sistema vai corrigindo o erro ao longo do tempo. No entanto, se o erro for muito pequeno, o valor de controle será também pequeno, o que evitará o acionamento da bomba.
+ 	* O valor de controle sendo maior que 0.8 implica que o sistema percebe uma necessidade de correção contínua (erro significativo), mantem a bomba ligada. Se o valor de controle for pequeno (menor que 0.8), isso indica que o nível está adequado e a bomba pode ser desligada. 
+
+  
 
 
 
