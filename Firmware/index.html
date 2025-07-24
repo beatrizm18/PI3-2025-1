@@ -1,1 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"   content="width=device-width, initial-scale=1.0">
+    <title>ESP32 Controle</title>
+    <script defer src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
 
+    <div class="buttons">
+        <!-- Botão para enviar comandos -->
+        <button onclick='sendCommand2()'>Ligar/Desligar Aquecedor</button>
+        <button onclick='sendCommand3()'>Controle da Bomba P101</button>
+        <button onclick='sendCommand4()'>Ligar/Desligar Bomba P101</button>
+        <button onclick='sendCommand6()'>Controle do Aquecedor E104</button>
+          
+    </div>
+
+    <div class="control">
+
+        <label for="dac1">Controle da Bomba P101:</label>
+        <input type="range" id="dac1-slider" min="0" max="255" value="0">
+        <input type="number" id="dac1-input" min="0" max="255" value="0">
+
+    </div>
+
+    <div class="control">
+        
+        <label for="dac2">Controle do Aquecedor E104:</label>
+        <input type="range" id="dac2-slider" min="0" max="255" value="0">
+        <input type="number" id="dac2-input" min="0" max="255" value="0">
+    
+    </div>
+
+    <div class="sensors">
+        <h2>Dados dos Sensores</h2>
+        <!-- Elementos para mostrar dados dos sensores -->
+        <p id='sensorAnalog1'>Sensor de Nível Ultrassônico B101: Aguardando dados...</p> 
+        <p id='sensorAnalog2'>Sensor de Vazão B102: Aguardando dados...</p> 
+        <p id='sensorAnalog3'>Sensor de Pressão B103: Aguardando dados...</p> 
+        <p id='sensorAnalog4'>Sensor de Temperatura B104: Aguardando dados...</p> 
+
+    </div>
+</div>
+</body>
+</html>
