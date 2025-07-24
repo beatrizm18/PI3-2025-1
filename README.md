@@ -448,9 +448,21 @@ Essa lógica garante que a bomba seja desligada quando o nível estiver adequado
 - O erro integral garante que, mesmo que haja pequenas flutuações no nível do reservatório, o sistema vai corrigindo o erro ao longo do tempo. No entanto, se o erro for muito pequeno, o valor de controle será também pequeno, o que evitará o acionamento da bomba.
  -  O valor de controle sendo maior que 0.8 implica que o sistema percebe uma necessidade de correção contínua (erro significativo), mantem a bomba ligada. Se o valor de controle for pequeno (menor que 0.8), isso indica que o nível está adequado e a bomba pode ser desligada. 
 
+### Resultados comparativos entre circuito controlado e sem controle PID
+
+O sistema com controle PID para o nível da água manteve a variável controlada sendo definida por um valor desejado (setpoint) e obteve a resposta rápida a mudanças, ajustando continuamente a saída do sistema para minimizar desvios. Por outro lado, o sistema sem controle não possui nenhum mecanismo de correção, ou seja, a variável pode variar livremente, o circuito não controlado tende a apresentar maiores flutuações e menor estabilidade.
   
+### Explicação e apresentação da interface
+
+A interface implementada, permite a exibição dos valores das variáveis de interesse, além disso, conta com um botão liga/desliga para a bomba, possibilitando um controle manual sobre a operação da bomba P101. 
+Quando o nível da água atinge o setpoint pré definido, ou seja, o valor desejado para o nível, o sistema de controle é automaticamente ativado. O controle entra em ação  ajustando os parâmetros de operação da bomba conforme necessário, para manter o nível de água o mais próximo do valor do setpoint. A interação do usuário com a interface é feita de maneira que, caso seja necessário, o usuário acione a bomba manualmente. Porém o sistema de controle assume o comando automaticamente quando as condições do sistema exigem, oferecendo uma solução automatizada que otimiza o funcionamento da bomba e melhora a eficiência geral do sistema.
 
 
+### Definição dos parâmetros Kp, Ki e Kd 
+
+Inicialmente, para os primeiros testes, arbitramos valores. Esses valores iniciais serviram como ponto de partida para o processo de ajuste, visando garantir que o controlador tivesse uma resposta adequada ao comportamento do sistema.
+Após a implementação inicial, realizamos ajustes nos parâmetros conforme necessário, testando o desempenho do sistema para diferentes valores. A partir da análise das respostas do sistema, fomos refinando os valores de Kp (proporcional) e Ki (integral), buscando minimizar erros.
+O parâmetro Kp foi ajustado para garantir que o sistema respondesse rapidamente ao erro, enquanto o Ki ajudou a corrigir desvios persistentes e o Kd não foi implementado como já explicado anteriormente, como o sistema não produz uma resposta rápida, não conseguimos utilizar esse parâmetro.
 
 
 
