@@ -402,8 +402,11 @@ Nesta etapa, foram desenvolvidos os circuitos de controle PID para os diferentes
 
 Na etapa anterior, havia sido implementado um controle ON/OFF com histerese para este circuito, com o objetivo de testar o comportamento da bomba. Esse controle simples utilizava uma faixa de segurança para evitar o acionamento frequente da bomba devido a pequenas variações no nível do reservatório.
 
-Com base nas definições iniciais do projeto, essa lógica seria substituída por um controle proporcional–integral–derivativo (PID), visando um controle mais preciso e contínuo do nível, reduzindo oscilações e melhorando a estabilidade do sistema.
+Com base nas definições iniciais do projeto, essa lógica seria substituída por um controle proporcional–integral–derivativo (PID), visando um controle mais preciso e contínuo do nível, reduzindo oscilações e melhorando a estabilidade do sistema. Optamos por utilizar um controle PI (Proporcional–Integral) em vez de um controle completo PID (Proporcional–Integral–Derivativo) devido às características específicas do sistema desenvolvido. Neste caso, trata-se de um acionamento simples, em que a bomba opera apenas em modo liga/desliga, sem variação contínua de potência ou velocidade.
 
+O uso do termo derivativo não se justifica nesse tipo de aplicação. Esse termo é normalmente empregado para antecipar mudanças no sistema, reagindo à taxa de variação do erro, o que pode ser útil em sistemas mais dinâmicos. No entanto, no contexto deste projeto, não há necessidade de uma resposta tão rápida. Além disso, o termo derivativo é sensível a ruídos no sinal de entrada, o que poderia causar oscilações ou instabilidades indesejadas.
+
+Já o controle proporcional responde diretamente ao erro atual, enquanto o termo integral (I) corrige desvios que permanecem ao longo do tempo. A combinação desses dois termos é suficiente para garantir um controle estável, eficaz e mais simples de implementar, atendendo bem aos requisitos do sistema.
 
 
 
