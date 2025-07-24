@@ -464,7 +464,7 @@ Inicialmente, para os primeiros testes, arbitramos valores. Esses valores inicia
 Após a implementação inicial, realizamos ajustes nos parâmetros conforme necessário, testando o desempenho do sistema para diferentes valores. A partir da análise das respostas do sistema, fomos refinando os valores de Kp (proporcional) e Ki (integral), buscando minimizar erros.
 O parâmetro Kp foi ajustado para garantir que o sistema respondesse rapidamente ao erro, enquanto o Ki ajudou a corrigir desvios persistentes e o Kd não foi implementado como já explicado anteriormente, como o sistema não produz uma resposta rápida, não conseguimos utilizar esse parâmetro.
 
-
+link do vídeo de funcionamento do sensor de nível: (https://www.youtube.com/shorts/cuCrc5mLkyE)
 
 
 
