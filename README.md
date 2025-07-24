@@ -396,6 +396,13 @@ No caso do sensor de vazão, o sensor em si está funcionando, mas a válvula es
 
 
 
+## Etapa 4 - Consolidação do Projeto
+
+Nesta etapa, foram desenvolvidos os circuitos de controle PID para os diferentes sensores utilizados no sistema. O desenvolvimento iniciou-se com o controle aplicado ao sensor de nível ultrassônico (B101), que controla a bomba P101.
+
+Na etapa anterior, havia sido implementado um controle ON/OFF com histerese para este circuito, com o objetivo de testar o comportamento da bomba. Esse controle simples utilizava uma faixa de segurança para evitar o acionamento frequente da bomba devido a pequenas variações no nível do reservatório.
+
+Com base nas definições iniciais do projeto, essa lógica seria substituída por um controle proporcional–integral–derivativo (PID), visando um controle mais preciso e contínuo do nível, reduzindo oscilações e melhorando a estabilidade do sistema.
 
 
 
