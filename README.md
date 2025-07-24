@@ -438,15 +438,15 @@ A equação do controle PI é dada por:
 
 O controle PI é calculado a cada um segundo, e esse valor de controle vai se alterando conforme o erro do sistema e o erro acumulado. A lógica de controle foi implementada para garantir que a bomba opere de maneira estável, evitando acionamentos/desligamentos constantes. 
 O código da função main foi estruturado da seguinte forma:
-	* Quando o valor de controle for maior que 0.8 e a bomba estiver ligada, o sistema mantém a bomba ligada. Isso acontece porque o controle PI indica que o nível do reservatório está dentro do intervalo desejado, ou que o erro é pequeno o suficiente para manter a bomba em operação. 
- 	* Quando o valor do controle for menor que 0.8 e a bomba estiver ligada, o sistema força o desligamento da bomba. Isso acontece porque o controle PI está indicando que o nível do reservatório atingiu um valor adequado e não há mais necessidade de acionar a bomba. 
+- Quando o valor de controle for maior que 0.8 e a bomba estiver ligada, o sistema mantém a bomba ligada. Isso acontece porque o controle PI indica que o nível do reservatório está dentro do intervalo desejado, ou que o erro é pequeno o suficiente para manter a bomba em operação. 
+- Quando o valor do controle for menor que 0.8 e a bomba estiver ligada, o sistema força o desligamento da bomba. Isso acontece porque o controle PI está indicando que o nível do reservatório atingiu um valor adequado e não há mais necessidade de acionar a bomba. 
 
 Essa lógica garante que a bomba seja desligada quando o nível estiver adequado e acionada quando necessário, mas sem oscilações constantes ou liga/desliga de forma excessiva. 
 
 ### Dinâmica do Sistema 
 
-	* O erro integral garante que, mesmo que haja pequenas flutuações no nível do reservatório, o sistema vai corrigindo o erro ao longo do tempo. No entanto, se o erro for muito pequeno, o valor de controle será também pequeno, o que evitará o acionamento da bomba.
- 	* O valor de controle sendo maior que 0.8 implica que o sistema percebe uma necessidade de correção contínua (erro significativo), mantem a bomba ligada. Se o valor de controle for pequeno (menor que 0.8), isso indica que o nível está adequado e a bomba pode ser desligada. 
+- O erro integral garante que, mesmo que haja pequenas flutuações no nível do reservatório, o sistema vai corrigindo o erro ao longo do tempo. No entanto, se o erro for muito pequeno, o valor de controle será também pequeno, o que evitará o acionamento da bomba.
+ -  O valor de controle sendo maior que 0.8 implica que o sistema percebe uma necessidade de correção contínua (erro significativo), mantem a bomba ligada. Se o valor de controle for pequeno (menor que 0.8), isso indica que o nível está adequado e a bomba pode ser desligada. 
 
   
 
