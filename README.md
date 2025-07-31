@@ -459,9 +459,9 @@ Quando o nível da água atinge o setpoint pré definido, ou seja, o valor desej
 
 ![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/interface.png)
 
-### Definição e ajuste dos parâmetros Kp, Ki e Kd 
+### Definição e ajuste dos parâmetros Kp e Ki 
 
-Inicialmente, para os primeiros testes, arbitramos valores. Esses valores iniciais serviram como ponto de partida para o processo de ajuste, visando garantir que o controlador tivesse uma resposta adequada ao comportamento do sistema.
+Inicialmente, utilizamos o Método da Curva de reação de Ziegler-Nichols. Esses valores iniciais serviram como ponto de partida para o processo de ajuste, visando garantir que o controlador tivesse uma resposta adequada ao comportamento do sistema.
 Após a implementação inicial, realizamos ajustes nos parâmetros conforme necessário, testando o desempenho do sistema para diferentes valores. A partir da análise das respostas do sistema, fomos refinando os valores de Kp (proporcional) e Ki (integral), buscando minimizar erros.
 O parâmetro Kp foi ajustado para garantir que o sistema respondesse rapidamente ao erro, enquanto o Ki ajudou a corrigir desvios persistentes e o Kd não foi implementado como já explicado anteriormente, como o sistema não produz uma resposta rápida, não conseguimos utilizar esse parâmetro.
 
