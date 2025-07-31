@@ -506,7 +506,7 @@ Inicialmente utilizamos o Kp = 6,9 e o Ki = 0,1 e obtemos a seguinte resposta do
 
 Com o tempo de acomodação é de 146 segundos. Do mesmo jeito que no de nível, ajustamos o kp para 1.0 e o ki para 0,0001, e como resultado tivemos:
 
-![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/teste_final_temp.png)
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/testefinaltemp.png)
 
 Foram obtidos valores de temperatura controlados dentro do esperado, onde o erro de regime permanente foi de até 3% e com uma boa estabilização da temperatura desejada, com uma rampa de subida rápida e tempo de acomodação de 108 segundos, mesmo com o projeto sofrendo interferências com as temperaturas do meio ambiente, por não se encontrar em um ambiente isolado termicamente.
 
