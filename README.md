@@ -460,10 +460,97 @@ Quando o nível da água atinge o setpoint pré definido, ou seja, o valor desej
 ![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/interface.png)
 
 ### Definição e ajuste dos parâmetros Kp e Ki 
+ 
 
 Inicialmente, utilizamos o Método da Curva de reação de Ziegler-Nichols. Esses valores iniciais serviram como ponto de partida para o processo de ajuste, visando garantir que o controlador tivesse uma resposta adequada ao comportamento do sistema.
 Após a implementação inicial, realizamos ajustes nos parâmetros conforme necessário, testando o desempenho do sistema para diferentes valores. A partir da análise das respostas do sistema, fomos refinando os valores de Kp (proporcional) e Ki (integral), buscando minimizar erros.
 O parâmetro Kp foi ajustado para garantir que o sistema respondesse rapidamente ao erro, enquanto o Ki ajudou a corrigir desvios persistentes e o Kd não foi implementado como já explicado anteriormente, como o sistema não produz uma resposta rápida, não conseguimos utilizar esse parâmetro.
+
+NÍVEL:
+
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/nivel_ajuste_parametros.png)
+
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/KIEKP.png)
+
+Utilizando o método da Curva de Reação de Ziegler Nichols, obtemos os parâmetros de 
+Kp = 6,9 e de Ki = 0,1. Porém, fomos ajustando afim de melhorar o gráfico e diminuir o overshooting.
+
+Inicialmente utilizamos o Kp = 6,9 e o Ki = 0,1 e obtemos a seguinte resposta do sistema:
+
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/pimeiro_teste_nivel.png)
+
+Como podemos observar o Kp estava muito grande, tendo muito overshooting e tornando o sistema mais instável, além disso o tempo que levava para estabilizar no setpoint demorava muito, o tempo de acomodação é de 224,5 segundos, ou seja, o Ki estava muito grande também. então decidimos diminuir o Kp para 2 e o Ki para 0,01. Como visto no gráfico abaixo:
+
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/segundo_teste_nivel.png)
+
+
+Com isso, conseguimos diminuir o overshooting ( quando a variável ultrapassa do setpoint), porém ainda estava demorando até estabilizar no setpoint, com um tempo de acomodação é de 48 segundos então diminuímos mais ainda o Ki para 0,001, como visto no gráfico abaixo:
+
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/teste_final_nivel.png)
+
+Com esse gráfico conseguimos um resultado satisfatório para o nosso controle PI, o gráfico estabiliza rapidamente (38 segundos) e com pouco overshooting, porém, ele ainda estabiliza levemente acima no valor do setpoint.
+Essa diferença é chamada de offset, e ocorre por conta de o Kp ser proporcional ao valor do erro. Então se o erro fosse 0, não existiria a ação de controle. 
+
+TEMPERATURA:
+
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/temp_calculo_parametros.png)
+
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/KIEKP.png)
+
+Utilizando o método da Curva de Reação de Ziegler Nichols, obtemos os parâmetros de 
+Kp = 6,9 e de Ki = 0,04. Porém, fomos ajustando a fim de melhorar o gráfico e diminuir o overshooting.
+
+Inicialmente utilizamos o Kp = 6,9 e o Ki = 0,1 e obtemos a seguinte resposta do sistema:
+
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/primeiro_teste_temp.png)
+
+Com o tempo de acomodação é de 146 segundos. Do mesmo jeito que no de nível, ajustamos o kp para 1.0 e o ki para 0,0001, e como resultado tivemos:
+
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/teste_final_temp.png)
+
+Foram obtidos valores de temperatura controlados dentro do esperado, onde o erro de regime permanente foi de até 3% e com uma boa estabilização da temperatura desejada, com uma rampa de subida rápida e tempo de acomodação de 108 segundos, mesmo com o projeto sofrendo interferências com as temperaturas do meio ambiente, por não se encontrar em um ambiente isolado termicamente.
+
+### Comparação controlado e não controlado 
+
+NÍVEL:
+
+Comparando o gráfico resposta ao sistema com e sem controle pomos perceber que o não controlado obteve um tempo de acomodação mais rápido do que o com controle. Isso poderia ser corrigido com um ajuste ainda mais refinado dos parametros Kp e Ki.  
+
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/NIVELLLLLLLLLLLLLLLLLLLL.png)
+
+como podemos observar no gráfico do sistema sem o controle PI, o tempo de acomodação foi de 18 segundos.
+
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/teste_final_nivel.png)
+
+Enquanto que esse gráfico mostra o tempo de acomodação de aproximadamente 38 segundos, esse tempo foi coletado após 10 amostras depois do valor do setpoint.
+
+TEMPERATURA:
+
+Sistema não controlado 
+
+Inicialmente foi realizada uma programação para se ler a entrada analógica, que vem do conversor AD (que está ligado ao sensor), e exibir os resultados no servidor. Porém, não ficou difícil identificarmos rapidamente a temperatura em graus. Foi realizada, então, uma conversão, para que no servidor a temperatura fosse exibida em graus.
+A leitura do sensor ia de 0-10V, então foi criado um circuito de divisor de tensão, para que o valor máximo na entrada do microcontrolador fosse de 3.3V. O fundo de escala de leitura do ADC era de 4096. Com base nisso, foi encontrada a equação que define o valor da temperatura em graus celsius.
+Com o valor máximo de temperatura de 100º, sabemos que o valor de tensão será de 3.3V, então, fazendo uma regra de três.
+
+Vin=(3.3*T)/100
+
+ADC=(Vin*4096)/Vref
+
+(ADC*Vref)/4096=Vin
+
+(ADC*3.3)/4096=3.3*T/100
+
+T=(ADC*100)/4096
+
+Embora o valor obtido não seja altamente preciso devido à limitação do fundo de escala do sensor, considerando que a variável medida é a temperatura, o valor registrado é adequado para as condições do experimento.
+
+Novamente podemos perceber através dos graficos abaixo que o tempo de acomodação do sistema sem controle foi menor do que o com controle PI.
+
+Sistema sem controle PI:
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/teste_final_nivel.png)
+
+Sistema com controle PI:
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/TEMPERATURAAAAAAAAAAA.png)
 
 link do vídeo de funcionamento do sensor de nível: (https://www.youtube.com/shorts/cuCrc5mLkyE)
 
