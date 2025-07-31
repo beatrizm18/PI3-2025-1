@@ -421,6 +421,21 @@ Inicialmente, foram definidos os parâmetros Kp e Ki ideais para o controle prop
 A variável "leitura_ultrassom" foi criada para armazenar o valor lido pelo ADC, que converte o sinal analógico do snesor de nível para um valor digital. Esse valor representa o nível do reservatório, e serve como base para o cálculo do erro do nível, que é a diferença entre o valor lido e o setpoint. 
 O setpoint foi definido como o valor máximo que o ADC pode ler para manter a bomba ligada. Caso o valor lido pelo ADC ultrapasse o setpoint, a bomba será desligada. 
 
+Inicialmente foi realizada uma programação para se ler a entrada analógica, que vem do conversor AD (que está ligado ao sensor), e exibir os resultados no servidor. Porém, não ficou difícil identificarmos rapidamente a temperatura em graus. Foi realizada, então, uma conversão, para que no servidor a temperatura fosse exibida em graus.
+A leitura do sensor ia de 0-10V, então foi criado um circuito de divisor de tensão, para que o valor máximo na entrada do microcontrolador fosse de 3.3V. O fundo de escala de leitura do ADC era de 4096. Com base nisso, foi encontrada a equação que define o valor da temperatura em graus celsius.
+Com o valor máximo de temperatura de 100º, sabemos que o valor de tensão será de 3.3V, então, fazendo uma regra de três.
+
+Vin=(3.3*T)/100
+
+ADC=(Vin*4096)/Vref
+
+(ADC*Vref)/4096=Vin
+
+(ADC*3.3)/4096=3.3*T/100
+
+T=(ADC*100)/4096
+
+Embora o valor obtido não seja altamente preciso devido à limitação do fundo de escala do sensor, considerando que a variável medida é a temperatura, o valor registrado é adequado para as condições do experimento.
 
 ### Cálculo do Erro e Erro Integral
 Com base na leitura_ultrassom e no setpoint, o erro do nível é calculado a cada leitura, representando a diferença entre o valor atual de nível e o valor desejado (setpoint). Este erro é então acumulado ao longo do tempo para calcular o erro integral, que representa o somatório do erro passado e é utilizado para corrigir desvios persistentes. 
@@ -431,12 +446,12 @@ Com base na leitura_ultrassom e no setpoint, o erro do nível é calculado a cad
 A equação do controle PI é dada por:
 
  controle=𝐾𝑝_nivel × erro_nivel + 𝐾𝑖_nivel × erro_integral_nivel
-	* O termo proporcional respondde ao erro atual, ajustando rapidamente a ação do sistema de acordo com a diferença entre o valor desejado e o valor medido. 
+	* O termo proporcional responde ao erro atual, ajustando rapidamente a ação do sistema de acordo com a diferença entre o valor desejado e o valor medido. 
  	* O termo integral acumula o erro ao longo do tempo, ajudando a corrigir pequenos desvios que o termo proporcional não consegue eliminar sozinho. 
 
 ### Lógica de Acionamento e Desligamento da Bomba
 
-O controle PI é calculado a cada um segundo, e esse valor de controle vai se alterando conforme o erro do sistema e o erro acumulado. A lógica de controle foi implementada para garantir que a bomba opere de maneira estável, evitando acionamentos/desligamentos constantes. 
+O controle PI é calculado a cada 0.5 segundos, e esse valor de controle vai se alterando conforme o erro do sistema e o erro acumulado. A lógica de controle foi implementada para garantir que a bomba opere de maneira estável, evitando acionamentos/desligamentos constantes. 
 O código da função main foi estruturado da seguinte forma:
 - Quando o valor de controle for maior que 0.8 e a bomba estiver ligada, o sistema mantém a bomba ligada. Isso acontece porque o controle PI indica que o nível do reservatório está dentro do intervalo desejado, ou que o erro é pequeno o suficiente para manter a bomba em operação. 
 - Quando o valor do controle for menor que 0.8 e a bomba estiver ligada, o sistema força o desligamento da bomba. Isso acontece porque o controle PI está indicando que o nível do reservatório atingiu um valor adequado e não há mais necessidade de acionar a bomba. 
@@ -446,12 +461,9 @@ Essa lógica garante que a bomba seja desligada quando o nível estiver adequado
 ### Dinâmica do Sistema 
 
 - O erro integral garante que, mesmo que haja pequenas flutuações no nível do reservatório, o sistema vai corrigindo o erro ao longo do tempo. No entanto, se o erro for muito pequeno, o valor de controle será também pequeno, o que evitará o acionamento da bomba.
- -  O valor de controle sendo maior que 0.8 implica que o sistema percebe uma necessidade de correção contínua (erro significativo), mantem a bomba ligada. Se o valor de controle for pequeno (menor que 0.8), isso indica que o nível está adequado e a bomba pode ser desligada. 
+ -  O valor de controle sendo maior que 0.8 implica que o sistema percebe uma necessidade de correção contínua (erro significativo), mantem a bomba ligada. Se o valor de controle for pequeno (menor que 0.8), isso indica que o nível está adequado e a bomba pode ser desligada.
 
-### Resultados comparativos entre circuito controlado e sem controle PID
-
-O sistema com controle PID para o nível da água manteve a variável controlada sendo definida por um valor desejado (setpoint) e obteve a resposta rápida a mudanças, ajustando continuamente a saída do sistema para minimizar desvios. Por outro lado, o sistema sem controle não possui nenhum mecanismo de correção, ou seja, a variável pode variar livremente, o circuito não controlado tende a apresentar maiores flutuações e menor estabilidade.
-  
+   
 ### Explicação e apresentação da interface
 
 A interface implementada, permite a exibição dos valores das variáveis de interesse, além disso, conta com um botão liga/desliga para a bomba, possibilitando um controle manual sobre a operação da bomba P101. 
@@ -461,7 +473,6 @@ Quando o nível da água atinge o setpoint pré definido, ou seja, o valor desej
 
 ### Definição e ajuste dos parâmetros Kp e Ki 
  
-
 Inicialmente, utilizamos o Método da Curva de reação de Ziegler-Nichols. Esses valores iniciais serviram como ponto de partida para o processo de ajuste, visando garantir que o controlador tivesse uma resposta adequada ao comportamento do sistema.
 Após a implementação inicial, realizamos ajustes nos parâmetros conforme necessário, testando o desempenho do sistema para diferentes valores. A partir da análise das respostas do sistema, fomos refinando os valores de Kp (proporcional) e Ki (integral), buscando minimizar erros.
 O parâmetro Kp foi ajustado para garantir que o sistema respondesse rapidamente ao erro, enquanto o Ki ajudou a corrigir desvios persistentes e o Kd não foi implementado como já explicado anteriormente, como o sistema não produz uma resposta rápida, não conseguimos utilizar esse parâmetro.
@@ -527,22 +538,6 @@ Enquanto que esse gráfico mostra o tempo de acomodação de aproximadamente 38 
 TEMPERATURA:
 
 Sistema não controlado 
-
-Inicialmente foi realizada uma programação para se ler a entrada analógica, que vem do conversor AD (que está ligado ao sensor), e exibir os resultados no servidor. Porém, não ficou difícil identificarmos rapidamente a temperatura em graus. Foi realizada, então, uma conversão, para que no servidor a temperatura fosse exibida em graus.
-A leitura do sensor ia de 0-10V, então foi criado um circuito de divisor de tensão, para que o valor máximo na entrada do microcontrolador fosse de 3.3V. O fundo de escala de leitura do ADC era de 4096. Com base nisso, foi encontrada a equação que define o valor da temperatura em graus celsius.
-Com o valor máximo de temperatura de 100º, sabemos que o valor de tensão será de 3.3V, então, fazendo uma regra de três.
-
-Vin=(3.3*T)/100
-
-ADC=(Vin*4096)/Vref
-
-(ADC*Vref)/4096=Vin
-
-(ADC*3.3)/4096=3.3*T/100
-
-T=(ADC*100)/4096
-
-Embora o valor obtido não seja altamente preciso devido à limitação do fundo de escala do sensor, considerando que a variável medida é a temperatura, o valor registrado é adequado para as condições do experimento.
 
 Novamente podemos perceber através dos graficos abaixo que o tempo de acomodação do sistema sem controle foi menor do que o com controle PI.
 
