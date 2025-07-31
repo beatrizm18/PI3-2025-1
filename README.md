@@ -3,7 +3,7 @@
 ## ETAPA 1:
 
 
-### INTRODUÇÃO
+### INTRODUÇÃO 
 Este projeto tem como o objetivo o desenvolvimento de um sistema embarcado completo para o monitoramento e controle de variáveis físicas na bancada MPS PA Compact Workstation, da Festo. A solução proposta será capaz de controlar, em tempo real, as variáveis de temperatura e nível, utilizando sensores e atuadores já integrados  à bancada. Todo o sistema de controle será implementado do zero, com código desenvolvido pela própria equipe, utilizando o microcontrolador ESP32. 
 
 A arquitetura do sistema será composta por sensores analógicos e digitais conectados às entradas do microcontrolador, que serão responsáveis pela leitura contínua dos sinais de processo. Após a conversão e tratamento dos sinais, os valores medidos serão comparados com seus respectivos setpoints, definidos manualmente por meio de botões ou menus. O controle PID será implementado no firmware para garantir que as variáveis de nível de água e temperatura na bancada MPS PA Compact Workstation sejam controladas de maneira eficiente e precisa. 
