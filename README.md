@@ -564,7 +564,7 @@ No primeiro teste de nível com os parametros grandes o tempo de subida foi mais
 
 No segundo teste, com a diminuição dos parametros o tempo de subida foi mais lento, porém diminuiu o overshooting, mas o tempo de acomodação ainda estava muito lento.
 
-![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/nivel.png)
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/2nivel.png)
 
 No teste final conseguimos reduzir o tempo de subida e praticamente zerar o overshooting, mas sem zerar o offset (responsável pela existencia da ação do controle). Esse foi o gráfico mais aproximado de um controle PI apropriado.
 
