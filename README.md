@@ -466,10 +466,10 @@ Essa lógica garante que a bomba seja desligada quando o nível estiver adequado
    
 ### Explicação e apresentação da interface
 
-A interface implementada, permite a exibição dos valores das variáveis de interesse, além disso, conta com um botão liga/desliga para a bomba, possibilitando um controle manual sobre a operação da bomba P101. 
-Quando o nível da água atinge o setpoint pré definido, ou seja, o valor desejado para o nível, o sistema de controle é automaticamente ativado. O controle entra em ação  ajustando os parâmetros de operação da bomba conforme necessário, para manter o nível de água o mais próximo do valor do setpoint. A interação do usuário com a interface é feita de maneira que, caso seja necessário, o usuário acione a bomba manualmente. Porém o sistema de controle assume o comando automaticamente quando as condições do sistema exigem, oferecendo uma solução automatizada que otimiza o funcionamento da bomba e melhora a eficiência geral do sistema.
+A interface implementada, permite a exibição dos valores das variáveis de interesse, além disso, conta com um botão liga/desliga para a bomba e aquecedor, possibilitando um controle manual sobre a operação da bomba P101 e do aquecedor E104.
+Foi desenvolvido um botão responsável pelo controle dos sistemas de nível e de temperatura. Quando o botão é pressionado, a água/temperatura aumentam até atingirem o valor do setpoint respectivo. Caso o botão pressionado seja o de liga/desliga, o sistema para. Quando só o liga/desliga é pressionado, não acontece o controle dos sistemas. 
 
-![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/interface.png)
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/iiiiiiii.png.png)
 
 ### Definição e ajuste dos parâmetros Kp e Ki 
  
