@@ -552,6 +552,34 @@ Sistema sem controle PI:
 Sistema com controle PI:
 ![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/TEMPERATURAAAAAAAAAAA.png)
 
+### Teste de resposta dinâmica (análise de estabilidade, oscilação e erro)
+
+Os testes foram feitos comparando os gráficos dos diferentes parametros Kp e Ki, tanto no de nível quanto no de temperatura:
+
+Nível
+
+No primeiro teste de nível com os parametros grandes o tempo de subida foi mais rapido, porém isso causou com que a oscilação (overshooting) fosse grande, o que teve grande impacto no tempo de acomodação e na estabilidade, tendo mais erros. 
+
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/1nivel.png)
+
+No segundo teste, com a diminuição dos parametros o tempo de subida foi mais lento, porém diminuiu o overshooting, mas o tempo de acomodação ainda estava muito lento.
+
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/nivel.png)
+
+No teste final conseguimos reduzir o tempo de subida e praticamente zerar o overshooting, mas sem zerar o offset (responsável pela existencia da ação do controle). Esse foi o gráfico mais aproximado de um controle PI apropriado.
+
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/finalnivel.png)
+
+Temperatura
+
+No primeiro teste de temperatura com os parametros grandes o tempo de subida foi mais rapido, porém isso causou com que a oscilação (overshooting) fosse grande, o que teve grande impacto no tempo de acomodação e na estabilidade, tendo mais erros. 
+
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/1temp.png)
+
+No teste final conseguimos reduzir o tempo de subida e praticamente zerar o overshooting, mas sem zerar o offset (responsável pela existencia da ação do controle). Esse foi o gráfico mais aproximado de um controle PI apropriado.
+
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/finaltemp.png)
+
 link do vídeo de funcionamento do sensor de nível: (https://www.youtube.com/shorts/cuCrc5mLkyE)
 
 
