@@ -1,5 +1,4 @@
-
-#include <stdio.h>			// Bibibliotecas gerais
+#include <stdio.h>			// Bibliotecas gerais
 #include <stdbool.h>
 #include <unistd.h>
 #include "driver/gpio.h"
@@ -21,17 +20,17 @@
 
 #define LIMIAR_PARADA 1000 // Limiar de parada da bomba (valor ADC)
 
+// Definições dos pinos
 
-//Definiçoes dos pinos
-
-//Saidas binarias
+// Saídas binárias
 #define 	M102			GPIO_NUM_15
 #define 	E104			GPIO_NUM_27
 #define 	K1				GPIO_NUM_14
 #define 	M1				GPIO_NUM_12
 #define 	M106			GPIO_NUM_13
 
-//Entradas binarias
+
+// Entradas binárias
 #define		B102			GPIO_NUM_2
 #define		S111			GPIO_NUM_4
 #define 	S112			GPIO_NUM_5
@@ -40,109 +39,79 @@
 #define 	S115			GPIO_NUM_22
 #define 	S116			GPIO_NUM_23
 
-//Saidas analogicas
+// Saídas analógicas
 #define 	P101			GPIO_NUM_26
 #define 	V106			GPIO_NUM_25
 
-//Entradas analogicas
+// Entradas analógicas
 #define 	LIC_B101		ADC_CHANNEL_4
 #define 	FIC_B102		ADC_CHANNEL_5
-#define 	TIC_B104		ADC_CHANNEL_7
 #define 	PIC_B103		ADC_CHANNEL_6
+#define 	TIC_B104		ADC_CHANNEL_7
 
-// Parâmetros PID
-float Kp = 1.0f;      // Ganho proporcional
-float Ki = 1.0f;      // Ganho integral
-float Kd = 0.05f;     // Ganho derivativo
+// Parâmetros PID para controle de nível
+float Kp_nivel = 2.0f;      
+float Ki_nivel = .001f;      
+   
+// Parâmetros PID para controle de temperatura
+float Kp_temp = 1.0f;      
+float Ki_temp = .0001f;
 
-float Kp_temp = 1.0f;      // Ganho proporcional
-float Ki_temp = 1.0f;      // Ganho integral
-float Kd_temp = 0.05f;     // Ganho derivativo
+// Setpoints
+int setpoint_nivel = 1000;  // Nível desejado (em unidades do sensor ultrassônico)
+int setpoint_temp = 1000;  // Temperatura desejada (em unidades do sensor de temperatura)
 
+// Variáveis de controle PID temperatur
+volatile float erro_nivel, erro_ant_nivel = 0, erro_int_nivel = 0;
+volatile float controle_nivel;
 
-int setpoint = 1000;   // Altura desejada (distância desejada do sensor)
-volatile float erro, erro_ant = 0, erro_int = 0;
-volatile float controle;
+// Variáveis de controle PID
 volatile float erro_temp, erro_ant_temp = 0, erro_int_temp = 0;
 volatile float controle_temp;
 
-
 static const char* TAG = "PI3";
 static bool bomba_ligada = false; // Flag para verificar o estado da bomba
-static bool E104_ligada = false; // Flag para verificar o estado da bomba
+static bool habilitar_controle_nivel = false;
+static bool aquecedor_ligado = false; //estaod do aquecedor
+static bool habilitar_controle_temperatura = false;
 
 // Handles dos canais do DAC
-dac_oneshot_handle_t V106_dac_handle;
 dac_oneshot_handle_t P101_dac_handle;
 
 // Handles dos canais do ADC
 adc_oneshot_unit_handle_t adc1_handle;
 
+// Variáveis globais
 // Variaveis globais
-static int M102_status = 0;
 static int E104_status = 0;
-static int K1_status = 0;
 static int M1_status = 0;
 static int M106_status = 0;
+int leitura_ultrassom = 0; // Leitura do sensor ultrassônico (nível)
+int leitura_temperatura = 0;   // Leitura do sensor de temperatura
 
-int leitura_ultrassom = 0; // Variável global para armazenar a leitura
-int leitura_temp = 0;
 
-extern adc_oneshot_unit_handle_t adc1_handle;
+// Função para inicializar SPIFFS (sistema de arquivos)
+void spiffs_init(void) {
+    esp_vfs_spiffs_conf_t fs_config = {
+        .base_path = "/storage",
+        .partition_label = NULL,
+        .max_files = 5,
+        .format_if_mount_failed = true,
+    };
 
-void spiffs_init(void){
-	esp_vfs_spiffs_conf_t fs_config = {
-		.base_path = "/storage",
-		.partition_label = NULL,
-		.max_files = 5,
-		.format_if_mount_failed = true,
-	};
-	
-	esp_err_t result = esp_vfs_spiffs_register(&fs_config);
-	
-	if(result != ESP_OK){
-		ESP_LOGE(TAG, "Failed to initialize SPIFFS (%s)", esp_err_to_name(result));
-	}
-	
-	size_t total = 0, used = 0;
-	result = esp_spiffs_info(fs_config.partition_label, &total, &used);
-	if(result != ESP_OK){
-		ESP_LOGE(TAG, "Failed to get partition info (%s)", esp_err_to_name(result));
-	}
-	else{
-		ESP_LOGI(TAG, "Partition size: total = %d, used = %d", total, used);
-	}
+    esp_err_t result = esp_vfs_spiffs_register(&fs_config);
+    if (result != ESP_OK) {
+        ESP_LOGE(TAG, "Falha ao inicializar SPIFFS (%s)", esp_err_to_name(result));
+    }
+
+    size_t total = 0, used = 0;
+    result = esp_spiffs_info(fs_config.partition_label, &total, &used);
+    if (result != ESP_OK) {
+        ESP_LOGE(TAG, "Falha ao obter informações da partição (%s)", esp_err_to_name(result));
+    } else {
+        ESP_LOGI(TAG, "Tamanho da partição: total = %d, usado = %d", total, used);
+    }
 }
-
-//static void wifi_init(void) {
-//    // Inicialize a rede e configure o modo station
-//    esp_netif_init();
-//    esp_event_loop_create_default();
-//    esp_netif_t *netif = esp_netif_create_default_wifi_sta();
-//
-//    // Configurar o IP fixo
-//    esp_netif_ip_info_t ip_info;
-//    inet_aton(STATIC_IP, &ip_info.ip);           				// Converte o IP fixo para formato binário
-//    inet_aton(GATEWAY_ADDR, &ip_info.gw);       					// Converte o gateway para formato binário
-//    inet_aton(NETMASK_ADDR, &ip_info.netmask);   				// Converte a máscara para formato binário
-//    esp_netif_dhcpc_stop(netif);                          // Desativa o DHCP
-//    esp_netif_set_ip_info(netif, &ip_info);       // Define as configurações de IP
-//
-//    // Configuração do Wi-Fi
-//    wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
-//    esp_wifi_init(&cfg);
-//    esp_wifi_set_mode(WIFI_MODE_STA);							// Modo "Station"
-//
-//    wifi_config_t wifi_config = {
-//        .sta = {
-//            .ssid = WIFI_SSID,
-//            .password = WIFI_PASS
-//        },
-//    };
-//    esp_wifi_set_config(ESP_IF_WIFI_STA, &wifi_config);
-//    esp_wifi_start();
-//    esp_wifi_connect();
-//}
 
 static void wifi_init(void) {
     // Inicializa a rede e configura o modo Access Point
@@ -266,101 +235,27 @@ static esp_err_t data_get_handler(httpd_req_t *req) {
 				}else{
 					snprintf(sensor_data, sizeof(sensor_data), "OFF");
 				}
-
-            } else if (strcmp(sensor, "sensorDig2") == 0) {
-                // Código para comando 2
-                //ESP_LOGD(TAG, "Sensor digital 2 lido");
-
-                if(gpio_get_level(S111) == 1){
-					snprintf(sensor_data, sizeof(sensor_data), "ON");
-				}else{
-					snprintf(sensor_data, sizeof(sensor_data), "OFF");
-				}
-                
-            } else if (strcmp(sensor, "sensorDig3") == 0) {
-                // Código para comando 3
-                //ESP_LOGD(TAG, "Sensor digital 3 lido");
-                
-                if(gpio_get_level(S112) == 1){
-					snprintf(sensor_data, sizeof(sensor_data), "ON");
-				}else{
-					snprintf(sensor_data, sizeof(sensor_data), "OFF");
-				}
-				
-            } else if (strcmp(sensor, "sensorDig4") == 0) {
-                // Código para comando 4
-                //ESP_LOGD(TAG, "Sensor digital 4 lido");
-                
-                if(gpio_get_level(B113) == 1){
-					snprintf(sensor_data, sizeof(sensor_data), "ON");
-				}else{
-					snprintf(sensor_data, sizeof(sensor_data), "OFF");
-				}
-				
-            } else if (strcmp(sensor, "sensorDig5") == 0) {
-                // Código para comando 5
-                //ESP_LOGD(TAG, "Sensor digital 5 lido");
-                
-               	if(gpio_get_level(B114) == 1){
-					snprintf(sensor_data, sizeof(sensor_data), "ON");
-				}else{
-					snprintf(sensor_data, sizeof(sensor_data), "OFF");
-				}
-			
-            } else if (strcmp(sensor, "sensorDig6") == 0) {
-                // Código para comando 6
-                //ESP_LOGD(TAG, "Sensor digital 6 lido");
-                
-               	if(gpio_get_level(S115) == 1){
-					snprintf(sensor_data, sizeof(sensor_data), "ON");
-				}else{
-					snprintf(sensor_data, sizeof(sensor_data), "OFF");
-				}
-			
-            } else if (strcmp(sensor, "sensorDig7") == 0) {
-                // Código para comando 5
-                //ESP_LOGD(TAG, "Sensor digital 7 lido");
-                
-               	if(gpio_get_level(S116) == 1){
-					snprintf(sensor_data, sizeof(sensor_data), "ON");
-				}else{
-					snprintf(sensor_data, sizeof(sensor_data), "OFF");
-				}
+   
 			
             } else if(strcmp(sensor, "sensorAnalog1") == 0) {
 				
 				//ESP_LOGD(TAG, "Sensor analógico 1 lido");
 				
 				//adc_oneshot_read(adc1_handle, LIC_B101, &adc_val);
+			   	printf("%d;%d\n", bomba_ligada, leitura_ultrassom); 
 				
-				//adc_val = adc_va;   // para vermos o valor correto da qnt de liquido 
-				
+	
 				snprintf(sensor_data, sizeof(sensor_data), "%d", leitura_ultrassom);
-			} else if(strcmp(sensor, "sensorAnalog2") == 0) {
-				
-				//ESP_LOGD(TAG, "Sensor analógico 2 lido");
-				
-				adc_oneshot_read(adc1_handle, FIC_B102, &adc_val);
-				
-				snprintf(sensor_data, sizeof(sensor_data), "%d", adc_val);
-			} else if(strcmp(sensor, "sensorAnalog3") == 0) {
-				
-				//ESP_LOGD(TAG, "Sensor analógico 3 lido");
-				
-				adc_oneshot_read(adc1_handle, PIC_B103, &adc_val);
-				
-			//	adc_val = adc_val * 10;
-				
-				snprintf(sensor_data, sizeof(sensor_data), "%d", adc_val);
+			
 			} else if(strcmp(sensor, "sensorAnalog4") == 0) {
 				
-				//ESP_LOGD(TAG, "Sensor analógico 4 lido");
+				//ESP_LOGD(TAG, "Sensor analógico 4 lido");	
+				float temp = (leitura_temperatura * 100)/4096;
 				
-				adc_oneshot_read(adc1_handle, TIC_B104, &adc_val);
+				printf("%d;%f\n", aquecedor_ligado, temp);
 				
-				
-				
-				snprintf(sensor_data, sizeof(sensor_data), "%d", leitura_temp);
+				//snprintf(sensor_data, sizeof(sensor_data), "%d", leitura_temperatura);
+				snprintf(sensor_data, sizeof(sensor_data), "%f", temp);
 			} else {
                 ESP_LOGE(TAG, "Comando não reconhecido: %s", sensor);
             }
@@ -388,40 +283,36 @@ static esp_err_t command_get_handler(httpd_req_t *req) {
         if (httpd_query_key_value(param, "tipo", command, sizeof(command)) == ESP_OK) {
             ESP_LOGI(TAG, "Comando recebido: %s", command);
             // Processa o comando recebido
-            if (strcmp(command, "command1") == 0) {
+            if (strcmp(command, "command2") == 0) {
                 
-                //ESP_LOGI(TAG, "Comando 1 executado");
+                //ESP_LOGI(TAG, "Comando 2 executado");
+                 E104_status = !E104_status;
+                gpio_set_level(E104, E104_status);  
                 
-                M102_status = !M102_status;
-            	gpio_set_level(M102, M102_status);
-                
-            } else if (strcmp(command, "command2") == 0) {
-                // Código para comando 2
-               // ESP_LOGI(TAG, "Comando 2 executado");
-                
-                E104_status = !E104_status;
-                gpio_set_level(E104, E104_status);
                 
             } else if (strcmp(command, "command3") == 0) {
                 // Código para comando 3
                 //ESP_LOGI(TAG, "Comando 3 executado");
                 
-                K1_status = !K1_status;
-                gpio_set_level(K1, K1_status);
                 
-            } else if (strcmp(command, "command4") == 0) {
-                // Código para comando 4
-                //ESP_LOGI(TAG, "Comando 4 executado");
-                
-                M1_status = !M1_status;
-	                gpio_set_level(M1, M1_status);
-                
+                habilitar_controle_nivel = !habilitar_controle_nivel;
+      
             } else if (strcmp(command, "command5") == 0) {
                 // Código para comando 5
                 //ESP_LOGI(TAG, "Comando 5 executado");
                 
                 M106_status = !M106_status;
                 gpio_set_level(M106, M106_status);
+             }
+            else if (strcmp(command, "command6") == 0) {
+                // Código para comando 5
+                //ESP_LOGI(TAG, "Comando 5 executado");
+                
+                habilitar_controle_temperatura = !habilitar_controle_temperatura;
+                
+                //M106_status = !M106_status;
+                //gpio_set_level(M106, M106_status);    
+               
             } else {
                 ESP_LOGW(TAG, "Comando não reconhecido: %s", command);
             }
@@ -462,14 +353,12 @@ static esp_err_t dac_get_handler(httpd_req_t *req) {
         		if (strcmp(canal_str, "dac1")) {
          			dac_oneshot_output_voltage(P101_dac_handle, valor);   
      			} else if (strcmp(canal_str, "dac2")) {
-        			dac_oneshot_output_voltage(V106_dac_handle, valor);	
+
         		} 
         	}
 
 		}
 	}
-
-
 
     httpd_resp_send(req, "Comando recebido", HTTPD_RESP_USE_STRLEN);
     return ESP_OK;
@@ -529,172 +418,158 @@ static httpd_handle_t start_webserver(void) {
     return server;
 }
 
-// Função PID
-float calcular_pid() {
-    erro = setpoint - leitura_ultrassom;  // Erro atual (setpoint - leitura do sensor)
-    erro_int += erro;                     // Soma dos erros (termo integral)
-   // float erro_der = erro - erro_ant;     // Diferença entre erro atual e erro anterior (termo derivativo)
 
 
-	
-    // Calcula o controle PID
-    controle = Kp * erro + Ki * erro_int;// + Kd * erro_der;
-    
+// Função para calcular o controle PID de nível
+float calcular_pid_nivel() {
+    erro_nivel = setpoint_nivel - leitura_ultrassom;  // Erro de nível
+    erro_int_nivel += erro_nivel;                     // Soma dos erros (termo integral)
+//    float erro_der_nivel = erro_nivel - erro_ant_nivel;  // Diferença entre erro atual e erro anterior (termo derivativo)
+
+    controle_nivel = Kp_nivel * erro_nivel + Ki_nivel * erro_int_nivel; //+ Kd_nivel * erro_der_nivel;
+
     // Limitar o controle a um intervalo válido (0 a 1 para ligar/desligar a bomba)
-    if (controle > 1.0f) {
-        controle = 1.0f;
-    } else if (controle < 0.0f) {
-        controle = 0.0f;
+    if (controle_nivel > 1.0f) {
+        controle_nivel = 1.0f;
+    } else if (controle_nivel < 0.0f) {
+        controle_nivel = 0.0f;
     }
-    
-     printf("erro: %f erro_int: %f controle: %f \n", erro,erro_int, controle );
 
-    erro_ant = erro;  // Atualiza o erro anterior para o próximo ciclo
+    erro_ant_nivel = erro_nivel;  // Atualiza o erro anterior para o próximo ciclo
 
-    return controle;
+    return controle_nivel;
 }
 
 
+// Função para calcular o controle PID de temperatura
 float calcular_pid_temp() {
-    erro = setpoint - leitura_temp;  // Erro atual (setpoint - leitura do sensor)
-    erro_int += erro;                     // Soma dos erros (termo integral)
-   // float erro_der = erro - erro_ant;     // Diferença entre erro atual e erro anterior (termo derivativo)
+    erro_temp = setpoint_temp - leitura_temperatura;  // Erro de temperatura
+    erro_int_temp += erro_temp;                     // Soma dos erros (termo integral)
+//    float erro_der_nivel = erro_nivel - erro_ant_nivel;  // Diferença entre erro atual e erro anterior (termo derivativo)
 
+    controle_temp = Kp_temp * erro_temp + Ki_temp * erro_int_temp; //+ Kd_temperatura * erro_der_temperatura;
 
-	
-    // Calcula o controle PID
-    controle_temp = Kp_temp * erro + Ki_temp * erro_int;// + Kd * erro_der;
-    
     // Limitar o controle a um intervalo válido (0 a 1 para ligar/desligar a bomba)
     if (controle_temp > 1.0f) {
         controle_temp = 1.0f;
     } else if (controle_temp < 0.0f) {
         controle_temp = 0.0f;
     }
-    
-     printf("erro: %f erro_int: %f controle: %f \n", erro,erro_int, controle_temp );
 
-    erro_ant = erro;  // Atualiza o erro anterior para o próximo ciclo
+    erro_ant_temp = erro_temp;  // Atualiza o erro anterior para o próximo ciclo
 
     return controle_temp;
 }
 
-void gpio_init(void){
-	
-	// Inicialização dos pinos de entrada e saída
-	gpio_config_t output_config = {
-		.pin_bit_mask = (1<<M102) | (1<<E104) | (1<<K1) | (1<<M1) | (1<<M106),
-		.mode = GPIO_MODE_OUTPUT,
-		.pull_up_en = GPIO_PULLUP_DISABLE,
-		.pull_down_en = GPIO_PULLDOWN_DISABLE,
-		.intr_type = GPIO_INTR_DISABLE 
-	};
-	gpio_config(&output_config);
-	
-	gpio_config_t input_config = {
-		.pin_bit_mask = (1<<B102) | (1<<S111) | (1<<S112) | (1<<B113) | (1<<B114) | (1<<S115) | (1<<S116), 
-		.mode = GPIO_MODE_INPUT,
-		.pull_up_en = GPIO_PULLUP_DISABLE,
-		.pull_down_en = GPIO_PULLDOWN_DISABLE,
-		.intr_type = GPIO_INTR_DISABLE
-	};
-		gpio_config(&input_config);
-}
 
-void dac_init(void){
-	
-	 /* DAC oneshot init */
-    dac_oneshot_config_t V106_cfg = {
-        .chan_id = DAC_CHAN_0,
-    };
-    ESP_ERROR_CHECK(dac_oneshot_new_channel(&V106_cfg, &V106_dac_handle));
-
-    dac_oneshot_config_t P101_cfg = {
-        .chan_id = DAC_CHAN_1,
-    };
-    ESP_ERROR_CHECK(dac_oneshot_new_channel(&P101_cfg, &P101_dac_handle));
-}
-
-void adc_init(void){
-	
-	// ADC1 Init
+// Função de inicialização do ADC
+void adc_init(void) {
     adc_oneshot_unit_init_cfg_t init_config1 = {
         .unit_id = ADC_UNIT_1,
     };
     ESP_ERROR_CHECK(adc_oneshot_new_unit(&init_config1, &adc1_handle));
 
-    // ADC1 Config
     adc_oneshot_chan_cfg_t config = {
         .atten = ADC_ATTEN_DB_12,
         .bitwidth = ADC_BITWIDTH_DEFAULT,
     };
+
+    ESP_ERROR_CHECK(adc_oneshot_config_channel(adc1_handle, LIC_B101, &config));  // Sensor ultrassônico
+    ESP_ERROR_CHECK(adc_oneshot_config_channel(adc1_handle, TIC_B104, &config));  // Sensor temperatura
     
-    ESP_ERROR_CHECK(adc_oneshot_config_channel(adc1_handle, LIC_B101, &config));
-    ESP_ERROR_CHECK(adc_oneshot_config_channel(adc1_handle, FIC_B102, &config));
-    ESP_ERROR_CHECK(adc_oneshot_config_channel(adc1_handle, PIC_B103, &config));
-    ESP_ERROR_CHECK(adc_oneshot_config_channel(adc1_handle, TIC_B104, &config)); 
 }
 
-void app_main(void)
-{
-	
-	// esp_log_level_set("*", ESP_LOG_WARN);
-	
+// Função para inicializar o DAC
+void dac_init(void) {
+       dac_oneshot_config_t P101_cfg = {
+        .chan_id = DAC_CHAN_1,
+    };
+    ESP_ERROR_CHECK(dac_oneshot_new_channel(&P101_cfg, &P101_dac_handle));
+}
 
-
-	
-	spiffs_init();			// Inicializa o sistema de arquivos
-	nvs_flash_init();       // Inicializa a memória não volátil
-	wifi_init();            // Inicializa o Wi-Fi
-	start_webserver();
-	gpio_init();
-	dac_init();
-	adc_init();
-	
-/*	 gpio_config_t io_conf = {
-        .pin_bit_mask = (1ULL << PINO_BOMBA),
+// Função de inicialização do GPIO
+void gpio_init(void) {
+    gpio_config_t output_config = {
+        .pin_bit_mask = (1<<M102) | (1<<E104) | (1<<K1) | (1<<M1) | (1<<M106),
         .mode = GPIO_MODE_OUTPUT,
-        .pull_up_en = 0,
-        .pull_down_en = 0,
+        .pull_up_en = GPIO_PULLUP_DISABLE,
+        .pull_down_en = GPIO_PULLDOWN_DISABLE,
         .intr_type = GPIO_INTR_DISABLE
     };
-    gpio_config(&io_conf); */
+    gpio_config(&output_config);
 
-       while (true) {
-        // Lê o valor do sensor ultrassônico
-        adc_oneshot_read(adc1_handle, LIC_B101, &leitura_ultrassom);
+    gpio_config_t input_config = {
+        .pin_bit_mask = (1<<B102) | (1<<S111) | (1<<S112) | (1<<B113) | (1<<B114) | (1<<S115) | (1<<S116),
+        .mode = GPIO_MODE_INPUT,
+        .pull_up_en = GPIO_PULLUP_DISABLE,
+        .pull_down_en = GPIO_PULLDOWN_DISABLE,
+        .intr_type = GPIO_INTR_DISABLE
+    };
+    gpio_config(&input_config);
+}
 
-        // Aplica o controle PID
-        float controle_pid = calcular_pid();
+void app_main(void) {
+    spiffs_init();          // Inicializa o sistema de arquivos
+    nvs_flash_init();       // Inicializa a memória não volátil
+    wifi_init();            // Inicializa o Wi-Fi
+    gpio_init();            // Inicializa os pinos GPIO
+    dac_init();             // Inicializa o DAC
+    adc_init();             // Inicializa o ADC
+    start_webserver();
+
+    while (true) {
         
-       // printf("Controle PID: %f\n", controle_pid);
-
-        // Se o controle PID indicar, liga a bomba
-        if (controle_pid > 0.8f && !bomba_ligada) {
-            gpio_set_level(M1, 1);  // Liga a bomba
-            bomba_ligada = true;
-            printf("Bomba ligada, controle PID: %f\n", controle_pid);
-        } else if (controle_pid <= 0.8f && bomba_ligada) {
-            gpio_set_level(M1, 0);  // Desliga a bomba
-            bomba_ligada = false;
-            printf("Bomba desligada, controle PID: %f\n", controle_pid);
+         // Lê os sensores
+        adc_oneshot_read(adc1_handle, LIC_B101, &leitura_ultrassom);  // Leitura do nível
+        
+        if (habilitar_controle_nivel == true) {
+        
+        	       
+	
+	        // Aplica o controle PID de nível
+	        float controle_pid_nivel = calcular_pid_nivel();
+	
+		//	printf("%d;%d\n", bomba_ligada, leitura_ultrassom);
+	
+	        // Controle de bomba baseado no PID de nível
+	        if (controle_pid_nivel > 0.8f && !bomba_ligada) {
+	            gpio_set_level(M1, 1);  // Liga a bomba
+	            bomba_ligada = true;
+	            //printf("Bomba ligada (nível), controle PID de nível: %f\n", controle_pid_nivel);
+	        } else if (controle_pid_nivel <= 0.8f && bomba_ligada) {
+	            gpio_set_level(M1, 0);  // Desliga a bomba
+	            bomba_ligada = false;
+	            //printf("Bomba desligada (nível), controle PID de nível: %f\n", controle_pid_nivel);
+	        }
         }
         
         
-        float controle_pid_temp = calcular_pid_temp();
-        
-       // printf("Controle PID: %f\n", controle_pid);
+    adc_oneshot_read(adc1_handle, TIC_B104, &leitura_temperatura);  // Leitura da temperatura
+    
+  		if (habilitar_controle_temperatura == true) {
+  
+	        // Lê os sensores
 
-        // Se o controle PID indicar, liga a bomba
-        if (controle_pid_temp > 0.8f && !E104_ligada) {
-            gpio_set_level(E104, 1);  // Liga a bomba
-            E104_ligada = true;
-            printf("Bomba ligada, controle PID: %f\n", controle_pid_temp);
-        } else if (controle_pid_temp <= 0.8f && E104_ligada) {
-            gpio_set_level(E104, 0);  // Desliga a bomba
-            E104_ligada = false;
-            printf("Bomba desligada, controle PID: %f\n", controle_pid_temp);
+	        // Aplica o controle PID de temperatura
+	        float controle_pid_temp = calcular_pid_temp();
+	
+		//	printf("%d;%f\n", aquecedor_ligado, temp);
+	
+	        // Controle de bomba baseado no PID de temperatura
+	        if (controle_pid_temp > 0.8f && !aquecedor_ligado) {
+	           gpio_set_level(E104, 1);  // Liga a bomba
+	            aquecedor_ligado = true;
+	            //printf("Aquecedor ligado (temperatura), controle PID de temperatura: %f\n", controle_pid_nivel);
+	        } else if (controle_pid_temp <= 0.8f && aquecedor_ligado) {
+	           gpio_set_level(E104, 0);  // Desliga a bomba
+	            aquecedor_ligado = false;
+	            //printf("Bomba desligada (temperatura), controle PID de temperatura: %f\n", controle_pid_nivel);
+	        } 
         }
+
+
+
+
 
         // Atraso de 500ms antes de ler novamente
         vTaskDelay(pdMS_TO_TICKS(500));
