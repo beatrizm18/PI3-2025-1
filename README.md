@@ -468,7 +468,7 @@ O parâmetro Kp foi ajustado para garantir que o sistema respondesse rapidamente
 
 NÍVEL:
 
-![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/nivel_ajuste_parametros.png)
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/pnivel.png)
 
 ![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/KIEKP.png)
 
@@ -477,23 +477,23 @@ Kp = 6,9 e de Ki = 0,1. Porém, fomos ajustando afim de melhorar o gráfico e di
 
 Inicialmente utilizamos o Kp = 6,9 e o Ki = 0,1 e obtemos a seguinte resposta do sistema:
 
-![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/pimeiro_teste_nivel.png)
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/1nivel.png)
 
 Como podemos observar o Kp estava muito grande, tendo muito overshooting e tornando o sistema mais instável, além disso o tempo que levava para estabilizar no setpoint demorava muito, o tempo de acomodação é de 224,5 segundos, ou seja, o Ki estava muito grande também. então decidimos diminuir o Kp para 2 e o Ki para 0,01. Como visto no gráfico abaixo:
 
-![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/segundo_teste_nivel.png)
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/2nivel.png)
 
 
 Com isso, conseguimos diminuir o overshooting ( quando a variável ultrapassa do setpoint), porém ainda estava demorando até estabilizar no setpoint, com um tempo de acomodação é de 48 segundos então diminuímos mais ainda o Ki para 0,001, como visto no gráfico abaixo:
 
-![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/teste_final_nivel.png)
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/finalnivel.png)
 
 Com esse gráfico conseguimos um resultado satisfatório para o nosso controle PI, o gráfico estabiliza rapidamente (38 segundos) e com pouco overshooting, porém, ele ainda estabiliza levemente acima no valor do setpoint.
 Essa diferença é chamada de offset, e ocorre por conta de o Kp ser proporcional ao valor do erro. Então se o erro fosse 0, não existiria a ação de controle. 
 
 TEMPERATURA:
 
-![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/temp_calculo_parametros.png)
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/ptemp.png)
 
 ![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/KIEKP.png)
 
@@ -502,11 +502,11 @@ Kp = 6,9 e de Ki = 0,04. Porém, fomos ajustando a fim de melhorar o gráfico e 
 
 Inicialmente utilizamos o Kp = 6,9 e o Ki = 0,1 e obtemos a seguinte resposta do sistema:
 
-![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/primeiro_teste_temp.png)
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/1temp.png)
 
 Com o tempo de acomodação é de 146 segundos. Do mesmo jeito que no de nível, ajustamos o kp para 1.0 e o ki para 0,0001, e como resultado tivemos:
 
-![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/testefinaltemp.png)
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/finaltemp.png)
 
 Foram obtidos valores de temperatura controlados dentro do esperado, onde o erro de regime permanente foi de até 3% e com uma boa estabilização da temperatura desejada, com uma rampa de subida rápida e tempo de acomodação de 108 segundos, mesmo com o projeto sofrendo interferências com as temperaturas do meio ambiente, por não se encontrar em um ambiente isolado termicamente.
 
@@ -520,7 +520,7 @@ Comparando o gráfico resposta ao sistema com e sem controle pomos perceber que 
 
 como podemos observar no gráfico do sistema sem o controle PI, o tempo de acomodação foi de 18 segundos.
 
-![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/teste_final_nivel.png)
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/finalnivel.png)
 
 Enquanto que esse gráfico mostra o tempo de acomodação de aproximadamente 38 segundos, esse tempo foi coletado após 10 amostras depois do valor do setpoint.
 
@@ -547,7 +547,7 @@ Embora o valor obtido não seja altamente preciso devido à limitação do fundo
 Novamente podemos perceber através dos graficos abaixo que o tempo de acomodação do sistema sem controle foi menor do que o com controle PI.
 
 Sistema sem controle PI:
-![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/teste_final_nivel.png)
+![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/finalnivel.png)
 
 Sistema com controle PI:
 ![Fluxograma](https://github.com/beatrizm18/PI3-2025-1/blob/main/imagens/TEMPERATURAAAAAAAAAAA.png)
